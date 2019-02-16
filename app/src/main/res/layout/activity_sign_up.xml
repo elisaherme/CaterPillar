@@ -14,13 +14,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="480dp"
         android:layout_marginLeft="480dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="480dp"
         android:layout_marginRight="480dp"
         android:layout_marginBottom="22dp"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/input_name"
@@ -42,13 +44,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="480dp"
         android:layout_marginLeft="480dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="480dp"
         android:layout_marginRight="480dp"
         android:layout_marginBottom="58dp"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <EditText
             android:id="@+id/input_password"
@@ -67,13 +71,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="480dp"
         android:layout_marginLeft="480dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="480dp"
         android:layout_marginRight="480dp"
         android:layout_marginBottom="25dp"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <EditText
             android:id="@+id/input_user"
@@ -86,27 +92,29 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.button.MaterialButton
-        android:id="@+id/login"
+        android:id="@+id/register_button"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="320dp"
         android:layout_height="65dp"
         android:layout_marginStart="480dp"
         android:layout_marginLeft="480dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="480dp"
         android:layout_marginRight="480dp"
         android:layout_marginBottom="122dp"
         android:background="@color/colorPrimary"
+        android:onClick="onClickRegister"
         android:text="@string/button_signup"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:onClick="onClickRegister"
         app:backgroundTint="@color/colorAccent"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <ImageView
         android:id="@+id/imageView"
