@@ -8,6 +8,11 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.engineio.client.Transport;
@@ -24,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private String mUsername;
 
     private Socket mSocket;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,34 +51,43 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-        // Set up the login form.
+        // Set up the login details
         mUsernameView = findViewById(R.id.input_user);
-        mPasswordView= findViewById(R.id.input_password);
-
-//        Button signInButton = (Button) findViewById(R.id.loginButton);
-//        signInButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                attemptLogin();
-//            }
-//        });
-
-
+        mPasswordView = findViewById(R.id.input_password);
+        if (mSocket.connected()) {
+            Toast.makeText(LoginActivity.this, "Connected!!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(LoginActivity.this, "Not Connected!!", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
-    public void onClickCreateAccount(View view){
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSocket.disconnect();
+    }
+
+
+    public void onClickCreateAccount(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 
-    public void onClickLogin(View view){
-//        Map<String, String> loginDetails = new HashMap<>();
-//        loginDetails.put("Login", mUsernameView.getText().toString());
-//        loginDetails.put("Password", mPasswordView.getText().toString());
-        mSocket.emit("new message", mUsernameView.getText().toString());
+    public void onClickLogin(View view) {
+        JSONObject loginDetails = new JSONObject();
+        JSONObject topLevel = new JSONObject();
+        try {
+            loginDetails.put("Login", mUsernameView.getText().toString());
+            loginDetails.put("Password", mPasswordView.getText().toString());
+            topLevel.put("type", "userDetails");
+            topLevel.put("data", loginDetails);
+        } catch (JSONException e) {
+            Log.d("Exec", e.getMessage());
+        }
+        mSocket.emit("data", topLevel);
         Log.i("socket", "sent login details");
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
     }
 }
