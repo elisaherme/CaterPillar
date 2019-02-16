@@ -57,15 +57,14 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
-                    String message;
+                    Log.i ("Received JSON Data" , data.toString());
                     try {
-                        message = data.getString("Success");
+                        String message = data.getString("Success");
+                        String user = data.getString("Name");
                         Log.i ("loginAuth",message);
-
-                        
                         if (message.equals("Success")) {
                             Log.i ("loginAuth","Starting new intent");
-                            Toast.makeText(LoginActivity.this, "Welcome " , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Welcome " +  user , Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }else {
