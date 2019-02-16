@@ -116,6 +116,8 @@
         android:layout_marginStart="448dp"
         android:layout_marginLeft="448dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="100dp"
         android:background="@android:color/transparent"
         android:onClick="onClickCreateAccount"
@@ -134,10 +136,12 @@
         android:id="@+id/button4"
         android:layout_width="54dp"
         android:layout_height="56dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="448dp"
-        android:layout_marginRight="448dp"
-        android:layout_marginBottom="109dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="450dp"
+        android:layout_marginRight="450dp"
+        android:layout_marginBottom="100dp"
         android:background="@android:color/transparent"
         android:onClick="onClickCreateAccount"
         android:text="here"
@@ -147,7 +151,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintVertical_bias="0.436" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>

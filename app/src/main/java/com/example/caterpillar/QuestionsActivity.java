@@ -41,8 +41,8 @@ public class QuestionsActivity extends AppCompatActivity {
     private void showTimePickerDialog()
     {
         // Get open TimePickerDialog button.
-        final Button timePickerDialogButton = (Button)findViewById(R.id.button_wake);
-        timePickerDialogButton.setOnClickListener(new View.OnClickListener() {
+        final Button timePickerDialogWake = (Button)findViewById(R.id.button_wake);
+        timePickerDialogWake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Create a new OnTimeSetListener instance. This listener will be invoked when user click ok button in TimePickerDialog.
@@ -56,7 +56,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         strBuf.append(hour);
                         strBuf.append(":");
                         strBuf.append(minute);
-                        timePickerDialogButton.setText(strBuf.toString());
+                        timePickerDialogWake.setText(strBuf.toString());
                     }
                 };
 
@@ -109,6 +109,106 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         });
 
-    }
+        final Button timePickerDialogLunch = (Button)findViewById(R.id.button_lunch);
+        timePickerDialogLunch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new OnTimeSetListener instance. This listener will be invoked when user click ok button in TimePickerDialog.
+                TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                        StringBuffer strBuf = new StringBuffer();
+                        if(hour < 10){
+                            strBuf.append("0");
+                        }
+                        strBuf.append(hour);
+                        strBuf.append(":");
+                        strBuf.append(minute);
+                        timePickerDialogLunch.setText(strBuf.toString());
+                    }
+                };
 
+                Calendar now = Calendar.getInstance();
+                int hour = now.get(java.util.Calendar.HOUR_OF_DAY);
+                int minute = now.get(java.util.Calendar.MINUTE);
+
+                // Whether show time in 24 hour format or not.
+                boolean is24Hour = true;
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(QuestionsActivity.this, onTimeSetListener, hour, minute, is24Hour);
+
+                timePickerDialog.setTitle("Please select time.");
+
+                timePickerDialog.show();
+            }
+        });
+
+        final Button timePickerDialogDinner = (Button)findViewById(R.id.button_dinner);
+        timePickerDialogDinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new OnTimeSetListener instance. This listener will be invoked when user click ok button in TimePickerDialog.
+                TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                        StringBuffer strBuf = new StringBuffer();
+                        if(hour < 10){
+                            strBuf.append("0");
+                        }
+                        strBuf.append(hour);
+                        strBuf.append(":");
+                        strBuf.append(minute);
+                        timePickerDialogDinner.setText(strBuf.toString());
+                    }
+                };
+
+                Calendar now = Calendar.getInstance();
+                int hour = now.get(java.util.Calendar.HOUR_OF_DAY);
+                int minute = now.get(java.util.Calendar.MINUTE);
+
+                // Whether show time in 24 hour format or not.
+                boolean is24Hour = true;
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(QuestionsActivity.this, onTimeSetListener, hour, minute, is24Hour);
+
+                timePickerDialog.setTitle("Please select time.");
+
+                timePickerDialog.show();
+            }
+        });
+
+        final Button timePickerDialogSleep = (Button)findViewById(R.id.button_sleep);
+        timePickerDialogSleep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new OnTimeSetListener instance. This listener will be invoked when user click ok button in TimePickerDialog.
+                TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                        StringBuffer strBuf = new StringBuffer();
+                        if(hour < 10){
+                            strBuf.append("0");
+                        }
+                        strBuf.append(hour);
+                        strBuf.append(":");
+                        strBuf.append(minute);
+                        timePickerDialogSleep.setText(strBuf.toString());
+                    }
+                };
+
+                Calendar now = Calendar.getInstance();
+                int hour = now.get(java.util.Calendar.HOUR_OF_DAY);
+                int minute = now.get(java.util.Calendar.MINUTE);
+
+                // Whether show time in 24 hour format or not.
+                boolean is24Hour = true;
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(QuestionsActivity.this, onTimeSetListener, hour, minute, is24Hour);
+
+                timePickerDialog.setTitle("Please select time.");
+
+                timePickerDialog.show();
+            }
+        });
+    }
 }
