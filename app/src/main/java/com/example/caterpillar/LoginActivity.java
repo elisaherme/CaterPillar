@@ -59,14 +59,46 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Toast.makeText(LoginActivity.this, "Not Connected!!", Toast.LENGTH_SHORT).show();
         }
-
+        mSocket.on("LoginAuth", LoginAuth);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mSocket.disconnect();
+        mSocket.off("LoginAuth", LoginAuth);
     }
+    private Emitter.Listener LoginAuth = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    String message;
+                    try {
+                        message = data.getString("Success");
+                        Log.i ("loginAuth",message);
+
+                        // TODO: (not working) Start new intent when message is success
+//                        if (message == "Success") {
+//                            Log.i ("loginAuth","Starting new intent");
+//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                            startActivity(intent);
+//                        }else {
+//                            Log.i ("loginAuth",message);
+//                            Toast.makeText(LoginActivity.this, "Wrong Password or Username!", Toast.LENGTH_SHORT).show();
+//                        }
+
+
+                    } catch (Exception e) {
+                        Log.e("loginAuth", e.getMessage());
+                        return;
+                    }
+                }
+            });
+        }
+    };
 
 
     public void onClickCreateAccount(View view) {
@@ -78,16 +110,14 @@ public class LoginActivity extends AppCompatActivity {
         JSONObject loginDetails = new JSONObject();
         JSONObject topLevel = new JSONObject();
         try {
-            loginDetails.put("Login", mUsernameView.getText().toString());
+            loginDetails.put("Username", mUsernameView.getText().toString());
             loginDetails.put("Password", mPasswordView.getText().toString());
             topLevel.put("type", "userDetails");
             topLevel.put("data", loginDetails);
         } catch (JSONException e) {
             Log.d("Exec", e.getMessage());
         }
-        mSocket.emit("data", topLevel);
+        mSocket.emit("login", topLevel);
         Log.i("socket", "sent login details");
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
     }
 }
