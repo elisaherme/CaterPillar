@@ -16,4 +16,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="encrypt_key">"Two One Nine Two"</string>
+
 </resources>

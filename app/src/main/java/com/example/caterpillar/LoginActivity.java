@@ -13,10 +13,12 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 import com.server.interaction.SocketManager;
+import com.utils.encryption.AESUtils;
+
+import javax.crypto.SecretKey;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -63,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         
                         if (message.equals("Success")) {
                             Log.i ("loginAuth","Starting new intent");
+                            Toast.makeText(LoginActivity.this, "Welcome " , Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }else {
@@ -91,8 +94,11 @@ public class LoginActivity extends AppCompatActivity {
         JSONObject loginDetails = new JSONObject();
         JSONObject topLevel = new JSONObject();
         try {
-            loginDetails.put("Username", mUsernameView.getText().toString());
-            loginDetails.put("Password", mPasswordView.getText().toString());
+            SecretKey secretKey = AESUtils.createKey(  getResources().getString(R.string.encrypt_key));
+            String userEncrypt = new String (AESUtils.encrypt(secretKey, mUsernameView.getText().toString().getBytes()));
+            String passEncrypt =new String (AESUtils.encrypt(secretKey, mPasswordView.getText().toString().getBytes()));
+            loginDetails.put("Username", userEncrypt);
+            loginDetails.put("Password", passEncrypt);
             topLevel.put("type", "userDetails");
             topLevel.put("data", loginDetails);
         } catch (JSONException e) {

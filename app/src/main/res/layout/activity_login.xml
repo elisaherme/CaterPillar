@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -49,7 +50,7 @@
         android:layout_marginRight="480dp"
         android:layout_marginBottom="16dp"
         android:textColorHint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +128,7 @@
         app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
         app:layout_constraintVertical_bias="0.406" />
 
     <Button
@@ -147,7 +148,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
         app:layout_constraintVertical_bias="0.436" />
 
 </android.support.constraint.ConstraintLayout>

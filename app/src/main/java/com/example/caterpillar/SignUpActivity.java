@@ -10,9 +10,12 @@ import android.widget.EditText;
 
 import com.github.nkzawa.socketio.client.Socket;
 import com.server.interaction.SocketManager;
+import com.utils.encryption.AESUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import javax.crypto.SecretKey;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText inputName ;
@@ -34,9 +37,12 @@ public class SignUpActivity extends AppCompatActivity {
                 // For now allow
                 JSONObject regDetails = new JSONObject();
                 JSONObject topLevel = new JSONObject();
+                SecretKey secretKey = AESUtils.createKey(  getResources().getString(R.string.encrypt_key));
+                String userEncrypt = new String (AESUtils.encrypt(secretKey, userName.getText().toString().getBytes()));
+                String passEncrypt =new String (AESUtils.encrypt(secretKey, password.getText().toString().getBytes()));
                 try {
-                    regDetails.put("Username", userName.getText().toString());
-                    regDetails.put("Password", password.getText().toString());
+                    regDetails.put("Username", userEncrypt);
+                    regDetails.put("Password", passEncrypt);
                     regDetails.put("Name",inputName.getText().toString());
                     topLevel.put("type", "userDetails");
                     topLevel.put("data", regDetails);
