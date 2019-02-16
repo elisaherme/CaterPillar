@@ -46,8 +46,8 @@ public class SignUpActivity extends AppCompatActivity {
                 // Registration event to write to files
                 mSocket.emit("data", topLevel);
                 Log.i("socket", "sent registration details");
-//                Intent intent = new Intent(SignUpActivity.this, QuestionsActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(SignUpActivity.this, QuestionsActivity.class);
+                startActivity(intent);
             }
         });
     }
