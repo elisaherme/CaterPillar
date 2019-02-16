@@ -21,12 +21,4 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
-//    public void onClickRegister(View view){
-//        Intent intent = new Intent(this, QuestionsActivity.class);
-//        startActivity(intent);
-//    }
-
-
-
 }
