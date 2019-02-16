@@ -80,15 +80,16 @@ public class LoginActivity extends AppCompatActivity {
                         message = data.getString("Success");
                         Log.i ("loginAuth",message);
 
-                        // TODO: (not working) Start new intent when message is success
-//                        if (message == "Success") {
-//                            Log.i ("loginAuth","Starting new intent");
-//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//                        }else {
-//                            Log.i ("loginAuth",message);
-//                            Toast.makeText(LoginActivity.this, "Wrong Password or Username!", Toast.LENGTH_SHORT).show();
-//                        }
+                        
+                        if (message.equals("Success")) {
+                            Log.i ("loginAuth","Starting new intent");
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }else {
+
+                            Log.i ("loginAuth","Failed to pass auth " + message);
+                            Toast.makeText(LoginActivity.this, "Wrong Password or Username!", Toast.LENGTH_SHORT).show();
+                        }
 
 
                     } catch (Exception e) {
