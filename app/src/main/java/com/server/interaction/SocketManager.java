@@ -1,6 +1,11 @@
 package com.server.interaction;
 import android.app.Application;
+import android.util.Log;
+
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.engineio.client.Transport;
 import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Manager;
 import com.github.nkzawa.socketio.client.Socket;
 import java.net.URISyntaxException;
 
@@ -21,6 +26,21 @@ public class SocketManager extends Application {
             throw new RuntimeException(e);
         }
         mSocket.connect();
+        mSocket.io().on(Manager.EVENT_TRANSPORT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Transport transport = (Transport) args[0];
+                transport.on(Transport.EVENT_ERROR, new Emitter.Listener() {
+                    @Override
+                    public void call(Object... args) {
+                        Exception e = (Exception) args[0];
+                        Log.e("socketConnection", "Transport error " + e);
+                        e.printStackTrace();
+                        e.getCause().printStackTrace();
+                    }
+                });
+            }
+        });
     }
     public Socket getmSocket(){
         return mSocket;
