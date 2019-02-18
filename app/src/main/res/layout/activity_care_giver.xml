@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CareGiverActivity">
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/button_next2"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="320dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="48dp"
+        android:background="@color/colorPrimary"
+        android:text="Add Medication"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/colorAccent"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="232dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="Maui"
+        android:textAlignment="textStart"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonCaregiver2"
+        app:layout_constraintTop_toBottomOf="@+id/questions_title2" />
+
+    <TextView
+        android:id="@+id/questions_title2"
+        android:layout_width="460dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Care Giver Manager"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintBottom_toTopOf="@+id/question_wake"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonCaregiver2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCaregiver2"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="123dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="664dp"
+        android:adjustViewBounds="false"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/maui"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
+        tools:adjustViewBounds="true"
+        tools:scaleType="fitXY" />
+
+</android.support.constraint.ConstraintLayout>
