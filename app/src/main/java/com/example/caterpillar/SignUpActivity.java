@@ -29,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
         inputName = findViewById(R.id.input_name);
         userName = findViewById(R.id.input_user);
         password = findViewById(R.id.input_password);
-        SocketManager app = (SocketManager) getApplication();
+        final SocketManager app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
         Button registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +49,8 @@ public class SignUpActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.d("Registration", e.getMessage());
                 }
+                // Set user
+                app.setUser(inputName.getText().toString());
                 // Registration event to write to files
                 mSocket.emit("data", topLevel);
                 Log.i("socket", "sent registration details");

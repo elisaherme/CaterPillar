@@ -3,6 +3,7 @@ package com.example.caterpillar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import java.util.Calendar;
@@ -15,26 +16,53 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import com.github.nkzawa.socketio.client.Socket;
+import com.server.interaction.SocketManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class QuestionsActivity extends AppCompatActivity {
 
     private TimePicker wakePicker;
     private Calendar calendar;
     private String format = "";
-
+    private Socket mSocket;
+    JSONObject questionAnswers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
-
+        final SocketManager app = (SocketManager) getApplication();
+        mSocket = app.getmSocket();
+        questionAnswers = new JSONObject();
         Button registerButton = findViewById(R.id.button_next);
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                JSONObject topLevel = new JSONObject();
+                try {
+                    questionAnswers.put("Name", app.getUser() );
+                    topLevel.put("type", "questions");
+                    topLevel.put("data", questionAnswers);
+                } catch (JSONException e) {
+                    Log.d("Registration", e.getMessage());
+                }
+                mSocket.emit("data",topLevel);
+                Log.d("Sent QuestionAnswers", topLevel.toString());
                 Intent intent = new Intent(QuestionsActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
 
         this.showTimePickerDialog();
+    }
+    private void addToJSON(String tag, String input ){
+        try {
+            questionAnswers.put(tag,input) ;
+        } catch (JSONException e) {
+            Log.d(tag, e.getMessage());
+        }
     }
 
 //    // Create and show a TimePickerDialog when click button.
@@ -56,6 +84,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         strBuf.append(hour);
                         strBuf.append(":");
                         strBuf.append(minute);
+                        addToJSON("Wake",strBuf.toString() );
                         timePickerDialogWake.setText(strBuf.toString());
                     }
                 };
@@ -90,6 +119,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         strBuf.append(hour);
                         strBuf.append(":");
                         strBuf.append(minute);
+                        addToJSON("Breakfast",strBuf.toString());
                         timePickerDialogBreakfast.setText(strBuf.toString());
                     }
                 };
@@ -124,6 +154,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         strBuf.append(hour);
                         strBuf.append(":");
                         strBuf.append(minute);
+                        addToJSON("Lunch",strBuf.toString());
                         timePickerDialogLunch.setText(strBuf.toString());
                     }
                 };
@@ -158,6 +189,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         strBuf.append(hour);
                         strBuf.append(":");
                         strBuf.append(minute);
+                        addToJSON("Dinner",strBuf.toString());
                         timePickerDialogDinner.setText(strBuf.toString());
                     }
                 };
@@ -192,6 +224,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         strBuf.append(hour);
                         strBuf.append(":");
                         strBuf.append(minute);
+                        addToJSON("Sleep",strBuf.toString());
                         timePickerDialogSleep.setText(strBuf.toString());
                     }
                 };
