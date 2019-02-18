@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    tools:context=".AddMedicationActivity">
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/buttonAddMedication2"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="280dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorPrimary"
+        android:text="Confirm"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/caterpillar" />
+
+    <TextView
+        android:id="@+id/textPatient"
+        android:layout_width="178dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Patient"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonCaregiver3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCaregiver3"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="123dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:adjustViewBounds="false"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/maui"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:adjustViewBounds="true"
+        tools:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/textPatientName"
+        android:layout_width="199dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="Moana"
+        android:textAlignment="textEnd"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonCaregiver3"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonCaregiver2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="135dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="75dp"
+        android:text="Name:"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMedication" />
+
+    <TextView
+        android:id="@+id/textInstruction"
+        android:layout_width="199dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="24dp"
+        android:text="Instruction:"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textName" />
+
+    <TextView
+        android:id="@+id/textRoutine"
+        android:layout_width="149dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="28dp"
+        android:text="Routine:"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInstruction" />
+
+    <TextView
+        android:id="@+id/textRoutine3"
+        android:layout_width="107dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="32dp"
+        android:text="Day:"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRoutine" />
+
+    <TextView
+        android:id="@+id/textRoutine4"
+        android:layout_width="107dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="88dp"
+        android:text="Time:"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRoutine3" />
+
+    <TextView
+        android:id="@+id/textRoutine5"
+        android:layout_width="107dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="32dp"
+        android:text="Meal:"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRoutine4" />
+
+    <TextView
+        android:id="@+id/textDay"
+        android:layout_width="372dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
+        android:text="Please select all that applies"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textRoutine"
+        app:layout_constraintTop_toBottomOf="@+id/editInstruction" />
+
+    <TextView
+        android:id="@+id/textMedication"
+        android:layout_width="878dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Please enter the medication details for"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintBottom_toTopOf="@+id/question_wake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="777dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="Medication Name"
+        android:inputType="textPersonName"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/textName"
+        app:layout_constraintTop_toBottomOf="@+id/textMedication" />
+
+    <EditText
+        android:id="@+id/editInstruction"
+        android:layout_width="777dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Instruction"
+        android:inputType="textLongMessage"
+        android:singleLine="false"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/textInstruction"
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
+
+    <CheckBox
+        android:id="@+id/checkBoxMorning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Morning"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/textRoutine4"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxSat" />
+
+    <CheckBox
+        android:id="@+id/checkBoxMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Monday"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/textRoutine3"
+        app:layout_constraintTop_toBottomOf="@+id/textDay" />
+
+    <CheckBox
+        android:id="@+id/checkBoxSun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Sunday"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxSat"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTue" />
+
+    <CheckBox
+        android:id="@+id/checkBoxSat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Saturday"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/textRoutine3"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxMon" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Tuesday"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxMon"
+        app:layout_constraintTop_toBottomOf="@+id/textDay" />
+
+    <CheckBox
+        android:id="@+id/checkBoxWed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Wednesday"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxTue"
+        app:layout_constraintTop_toBottomOf="@+id/textDay" />
+
+    <CheckBox
+        android:id="@+id/checkBoxThu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Thursday"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxWed"
+        app:layout_constraintTop_toBottomOf="@+id/textDay" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFriday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Friday"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxThu"
+        app:layout_constraintTop_toBottomOf="@+id/textDay" />
+
+    <CheckBox
+        android:id="@+id/checkBoxAfternoon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Afternoon"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxMorning"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxSun" />
+
+    <CheckBox
+        android:id="@+id/checkBoxNight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Night"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxAfternoon"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxSun" />
+
+    <RadioGroup
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/textRoutine5"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxMorning">
+
+        <RadioButton
+            android:id="@+id/radioButtonBefore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Before"
+            android:textSize="30sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonAfter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="After"
+            android:textSize="30sp" />
+    </RadioGroup>
+
+</android.support.constraint.ConstraintLayout>
