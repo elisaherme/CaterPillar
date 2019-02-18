@@ -16,6 +16,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
         android:background="@color/colorPrimary"
+        android:onClick="onClickConfirm"
         android:text="Confirm"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/background_light"
@@ -224,7 +225,7 @@
 
     <CheckBox
         android:id="@+id/checkBoxMon"
-        android:layout_width="wrap_content"
+        android:layout_width="143dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
@@ -235,7 +236,7 @@
 
     <CheckBox
         android:id="@+id/checkBoxSun"
-        android:layout_width="wrap_content"
+        android:layout_width="133dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
@@ -246,7 +247,7 @@
 
     <CheckBox
         android:id="@+id/checkBoxSat"
-        android:layout_width="wrap_content"
+        android:layout_width="151dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
@@ -257,7 +258,7 @@
 
     <CheckBox
         android:id="@+id/checkBoxTue"
-        android:layout_width="wrap_content"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
@@ -268,7 +269,7 @@
 
     <CheckBox
         android:id="@+id/checkBoxWed"
-        android:layout_width="wrap_content"
+        android:layout_width="193dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
@@ -279,7 +280,7 @@
 
     <CheckBox
         android:id="@+id/checkBoxThu"
-        android:layout_width="wrap_content"
+        android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
@@ -289,8 +290,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textDay" />
 
     <CheckBox
-        android:id="@+id/checkBoxFriday"
-        android:layout_width="wrap_content"
+        android:id="@+id/checkBoxFri"
+        android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
@@ -322,6 +323,7 @@
         app:layout_constraintTop_toBottomOf="@+id/checkBoxSun" />
 
     <RadioGroup
+        android:id="@+id/radioGroupMeal"
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
