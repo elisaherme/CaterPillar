@@ -7,14 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".CareGiverActivity">
 
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/caterpillar" />
+
     <android.support.design.button.MaterialButton
-        android:id="@+id/button_next2"
+        android:id="@+id/buttonAddMedication"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="320dp"
         android:layout_height="65dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
         android:background="@color/colorPrimary"
+        android:onClick="onClickAddMedication"
         android:text="Add Medication"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/background_light"
@@ -23,13 +35,15 @@
         app:backgroundTint="@color/colorAccent"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="232dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="Maui"
@@ -44,8 +58,8 @@
         android:id="@+id/questions_title2"
         android:layout_width="460dp"
         android:layout_height="65dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:text="Care Giver Manager"
         android:textColor="@color/colorPrimary"
@@ -60,7 +74,7 @@
         style="@android:style/Widget.ImageButton"
         android:layout_width="123dp"
         android:layout_height="125dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="664dp"
         android:adjustViewBounds="false"
         android:padding="15dp"

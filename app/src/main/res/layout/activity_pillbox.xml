@@ -299,6 +299,7 @@
         android:layout_marginTop="16dp"
         android:onClick="onClickRefresh"
         android:text="Refresh"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
