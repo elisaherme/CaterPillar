@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Wear</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World! It\'s not time for your next dosage yet!</string>
+    <string name="in_bed">Goodnight :)</string>
+    <string name="wake_button_title">Wake Up</string>
+    <string name="sleep_button_title">Sleep</string>
+</resources>
