@@ -14,9 +14,19 @@ public class SocketManager extends Application {
     private Socket mSocket;
 //    private static final String URL = "http://35.246.29.217:65080/";
     private static final String URL = "http://192.168.0.24:65080/";
+    private static  String user;
     public SocketManager(){
         //initialize maybe with default values if any based on use case
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
