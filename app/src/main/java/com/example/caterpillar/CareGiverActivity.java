@@ -21,7 +21,6 @@ import org.json.JSONObject;
 public class CareGiverActivity extends AppCompatActivity {
 
     private Socket mSocket;
-    private String[] Names;
     private final String [] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     private final String [] times = {"Morning", "Afternoon", "Night"};
 
@@ -33,8 +32,13 @@ public class CareGiverActivity extends AppCompatActivity {
         SocketManager app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
         mSocket.on("responseMed", medRequest);
-        Log.i ("user", app.getUser());
         mSocket.emit("queryMed", app.getUser());
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSocket.disconnect();
+        mSocket.off("responseMed", medRequest);
     }
 
     public void onClickAddMedication(View view) {
@@ -66,13 +70,13 @@ public class CareGiverActivity extends AppCompatActivity {
                             for (int i = 0; i < data.length(); i++) {
                                 JSONObject obj = data.getJSONObject(i);
 
-                                textOut = textOut + (i + 1) + ". " + obj.getString("Name") + "\t\t\ton ";
+                                textOut = textOut + (i + 1) + ". " + obj.getString("Name") + ";\t\t\ton ";
                                 for( String day : days ) {
                                     if(obj.getBoolean(day)){
                                         textOut = textOut + day + " ";
                                     }
                                 }
-                                textOut = textOut + "\t\tat ";
+                                textOut = textOut + ";\t\tat ";
                                 for( String time : times ) {
                                     if(obj.getBoolean(time)){
                                         textOut = textOut + time + " ";

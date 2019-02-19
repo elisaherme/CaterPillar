@@ -87,8 +87,6 @@ public class AddMedicationActivity extends AppCompatActivity {
             regDetails.put("Night", checkBoxNight.isChecked());
             regDetails.put("Meal", radioButton.getText().toString());
 
-
-
             topLevel.put("type", "addMedication");
             topLevel.put("data", regDetails);
         } catch (JSONException e) {
