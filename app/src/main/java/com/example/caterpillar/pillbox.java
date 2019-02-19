@@ -42,7 +42,6 @@ public class pillbox extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSocket.disconnect();
         mSocket.off("responseMed", fillPillbox);
     }
 

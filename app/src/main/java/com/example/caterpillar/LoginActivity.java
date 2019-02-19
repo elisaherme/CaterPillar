@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSocket.disconnect();
         mSocket.off("LoginAuth", LoginAuth);
     }
     private Emitter.Listener LoginAuth = new Emitter.Listener() {
