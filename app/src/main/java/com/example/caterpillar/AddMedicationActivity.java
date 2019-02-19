@@ -40,6 +40,9 @@ public class AddMedicationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medication);
+
+        editName = (EditText) findViewById(R.id.editName);
+        editInstruction = (EditText) findViewById(R.id.editInstruction);
     }
 
     public void onClickConfirm(View view) {
@@ -47,9 +50,6 @@ public class AddMedicationActivity extends AppCompatActivity {
         mSocket = app.getmSocket();
 
         setContentView(R.layout.activity_add_medication);
-
-        editName = findViewById(R.id.editName);
-        editInstruction = findViewById(R.id.editInstruction);
 
         checkBoxMon = ((CheckBox) findViewById(R.id.checkBoxMon)).isChecked();
         checkBoxTue = ((CheckBox) findViewById(R.id.checkBoxTue)).isChecked();
@@ -83,13 +83,16 @@ public class AddMedicationActivity extends AppCompatActivity {
             regDetails.put("Night", checkBoxNight);
             regDetails.put("Meal", radioButton.getText().toString());
 
-            topLevel.put("type", "medication");
+            topLevel.put("type", "addMedication");
             topLevel.put("data", regDetails);
         } catch (JSONException e) {
             Log.d("Medication", e.getMessage());
         }
         mSocket.emit("data", topLevel);
         Log.i("socket", "sent medication details");
+        Log.i("name", editName.getText().toString());
+        Log.i("instr", editInstruction.getText().toString());
+        Log.i("checkpoint", "mmm");
 
         Intent intent = new Intent(this, CareGiverActivity.class);
         startActivity(intent);
