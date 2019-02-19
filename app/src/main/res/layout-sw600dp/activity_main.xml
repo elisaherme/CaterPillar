@@ -137,6 +137,7 @@
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:onClick="onClickManage"
         app:backgroundTint="@color/colorAccent"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
