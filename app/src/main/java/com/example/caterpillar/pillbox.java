@@ -1,10 +1,12 @@
 package com.example.caterpillar;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
@@ -34,11 +36,42 @@ public class pillbox extends AppCompatActivity {
         mSocket = app.getmSocket();
         mSocket.on("responseMed", fillPillbox);
         mSocket.emit("queryMed", app.getUser());
-
+        mSocket.on("slot_opened",slotOpen);
+        mSocket.on("pill",pillDisplay);
         userName = findViewById(R.id.textUsername);
         name = app.getUser();
         userName.setText(name);
     }
+    private Emitter.Listener slotOpen = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    Log.i ("Received JSON Data" , data.toString());
+                    Toast.makeText(pillbox.this, "Raspberry Pi Slot Opened, MSG: " +  data.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener pillDisplay = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    Log.i ("Received JSON Data" , data.toString());
+                    Toast.makeText(pillbox.this, "Raspberry Pi Pill taken, MSG: " +  data.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    };
+
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
