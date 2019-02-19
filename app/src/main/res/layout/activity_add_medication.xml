@@ -22,7 +22,7 @@
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:backgroundTint="@color/colorPrimaryDark"
+        app:backgroundTint="@color/colorAccent"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

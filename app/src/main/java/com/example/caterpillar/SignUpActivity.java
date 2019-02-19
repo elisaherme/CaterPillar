@@ -21,6 +21,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText inputName ;
     private EditText userName;
     private EditText password;
+    private EditText caregiverName;
     private Socket mSocket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
         inputName = findViewById(R.id.input_name);
         userName = findViewById(R.id.input_user);
         password = findViewById(R.id.input_password);
+        caregiverName = findViewById(R.id.input_caregiver);
         final SocketManager app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
         Button registerButton = findViewById(R.id.register_button);
@@ -44,6 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
                     regDetails.put("Username", userEncrypt);
                     regDetails.put("Password", passEncrypt);
                     regDetails.put("Name",inputName.getText().toString());
+                    regDetails.put("Caregiver", caregiverName.getText().toString());
                     topLevel.put("type", "userDetails");
                     topLevel.put("data", regDetails);
                 } catch (JSONException e) {
@@ -51,6 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 // Set user
                 app.setUser(inputName.getText().toString());
+                app.setCaregiver(caregiverName.getText().toString());
                 // Registration event to write to files
                 mSocket.emit("data", topLevel);
                 Log.i("socket", "sent registration details");
