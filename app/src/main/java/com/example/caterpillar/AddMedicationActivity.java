@@ -21,17 +21,17 @@ public class AddMedicationActivity extends AppCompatActivity {
     private EditText editName;
     private EditText editInstruction;
 
-    private Boolean checkBoxMon;
-    private Boolean checkBoxTue;
-    private Boolean checkBoxWed;
-    private Boolean checkBoxThu;
-    private Boolean checkBoxFri;
-    private Boolean checkBoxSat;
-    private Boolean checkBoxSun;
+    private CheckBox checkBoxMon;
+    private CheckBox checkBoxTue;
+    private CheckBox checkBoxWed;
+    private CheckBox checkBoxThu;
+    private CheckBox checkBoxFri;
+    private CheckBox checkBoxSat;
+    private CheckBox checkBoxSun;
 
-    private Boolean checkBoxMorning;
-    private Boolean checkBoxAfternoon;
-    private Boolean checkBoxNight;
+    private CheckBox checkBoxMorning;
+    private CheckBox checkBoxAfternoon;
+    private CheckBox checkBoxNight;
 
     private RadioGroup radioGroupMeal;
     private RadioButton radioButton;
@@ -43,6 +43,19 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         editName = (EditText) findViewById(R.id.editName);
         editInstruction = (EditText) findViewById(R.id.editInstruction);
+
+        checkBoxMon = ((CheckBox) findViewById(R.id.checkBoxMon));
+        checkBoxTue = ((CheckBox) findViewById(R.id.checkBoxTue));
+        checkBoxWed = ((CheckBox) findViewById(R.id.checkBoxWed));
+        checkBoxThu = ((CheckBox) findViewById(R.id.checkBoxThu));
+        checkBoxFri = ((CheckBox) findViewById(R.id.checkBoxFri));
+        checkBoxSat = ((CheckBox) findViewById(R.id.checkBoxSat));
+        checkBoxSun = ((CheckBox) findViewById(R.id.checkBoxSun));
+
+        checkBoxMorning = ((CheckBox) findViewById(R.id.checkBoxMorning));
+        checkBoxAfternoon = ((CheckBox) findViewById(R.id.checkBoxAfternoon));
+        checkBoxNight = ((CheckBox) findViewById(R.id.checkBoxNight));
+
     }
 
     public void onClickConfirm(View view) {
@@ -51,37 +64,30 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_medication);
 
-        checkBoxMon = ((CheckBox) findViewById(R.id.checkBoxMon)).isChecked();
-        checkBoxTue = ((CheckBox) findViewById(R.id.checkBoxTue)).isChecked();
-        checkBoxWed = ((CheckBox) findViewById(R.id.checkBoxWed)).isChecked();
-        checkBoxThu = ((CheckBox) findViewById(R.id.checkBoxThu)).isChecked();
-        checkBoxFri = ((CheckBox) findViewById(R.id.checkBoxFri)).isChecked();
-        checkBoxSat = ((CheckBox) findViewById(R.id.checkBoxSat)).isChecked();
-        checkBoxSun = ((CheckBox) findViewById(R.id.checkBoxSun)).isChecked();
-
-        checkBoxMorning = ((CheckBox) findViewById(R.id.checkBoxMorning)).isChecked();
-        checkBoxAfternoon = ((CheckBox) findViewById(R.id.checkBoxAfternoon)).isChecked();
-        checkBoxNight = ((CheckBox) findViewById(R.id.checkBoxNight)).isChecked();
-
         radioGroupMeal = (RadioGroup) findViewById(R.id.radioGroupMeal);
         radioButton = (RadioButton) findViewById(radioGroupMeal.getCheckedRadioButtonId());
+
+        Log.i("days", String.valueOf(checkBoxMon.isChecked()));
 
         JSONObject topLevel = new JSONObject();
         JSONObject regDetails = new JSONObject();
         try {
+            regDetails.put("User", app.getUser());
             regDetails.put("Name", editName.getText().toString());
             regDetails.put("Instruction", editInstruction.getText().toString());
-            regDetails.put("Mon", checkBoxMon);
-            regDetails.put("Tue", checkBoxTue);
-            regDetails.put("Wed", checkBoxWed);
-            regDetails.put("Thu", checkBoxThu);
-            regDetails.put("Fri", checkBoxFri);
-            regDetails.put("Sat", checkBoxSat);
-            regDetails.put("Sun", checkBoxSun);
-            regDetails.put("Morning", checkBoxMorning);
-            regDetails.put("Afternoon", checkBoxAfternoon);
-            regDetails.put("Night", checkBoxNight);
+            regDetails.put("Mon", checkBoxMon.isChecked());
+            regDetails.put("Tue", checkBoxTue.isChecked());
+            regDetails.put("Wed", checkBoxWed.isChecked());
+            regDetails.put("Thu", checkBoxThu.isChecked());
+            regDetails.put("Fri", checkBoxFri.isChecked());
+            regDetails.put("Sat", checkBoxSat.isChecked());
+            regDetails.put("Sun", checkBoxSun.isChecked());
+            regDetails.put("Morning", checkBoxMorning.isChecked());
+            regDetails.put("Afternoon", checkBoxAfternoon.isChecked());
+            regDetails.put("Night", checkBoxNight.isChecked());
             regDetails.put("Meal", radioButton.getText().toString());
+
+
 
             topLevel.put("type", "addMedication");
             topLevel.put("data", regDetails);
