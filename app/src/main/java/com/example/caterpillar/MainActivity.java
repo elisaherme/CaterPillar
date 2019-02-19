@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickSignOut(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, AlarmActivity.class);
         startActivity(intent);
     }
 }
