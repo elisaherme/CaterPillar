@@ -7,7 +7,7 @@
     tools:context=".pillbox">
 
     <TextView
-        android:id="@+id/textUser"
+        android:id="@+id/textUsername"
         android:layout_width="372dp"
         android:layout_height="0dp"
         android:layout_marginStart="796dp"

@@ -24,6 +24,11 @@ public class CareGiverActivity extends AppCompatActivity {
     private final String [] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     private final String [] times = {"Morning", "Afternoon", "Night"};
 
+    private String name;
+    private String caregiver;
+    private TextView userName;
+    private TextView careGiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,14 @@ public class CareGiverActivity extends AppCompatActivity {
         mSocket = app.getmSocket();
         mSocket.on("responseMed", medRequest);
         mSocket.emit("queryMed", app.getUser());
+
+        userName = findViewById(R.id.textPatientName);
+        careGiver = findViewById(R.id.textView4);
+
+        name = app.getUser();
+        caregiver = app.getCaregiver();
+        userName.setText(name);
+        careGiver.setText(caregiver);
     }
     @Override
     public void onDestroy() {

@@ -22,6 +22,8 @@ public class pillbox extends AppCompatActivity {
     private final String [] times = {"Mor", "Aft", "Ngt"};
     private final String [] fulltimes = {"Morning", "Afternoon", "Night"};
 
+    private String name;
+    private TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,10 @@ public class pillbox extends AppCompatActivity {
         mSocket = app.getmSocket();
         mSocket.on("responseMed", fillPillbox);
         mSocket.emit("queryMed", app.getUser());
+
+        userName = findViewById(R.id.textUsername);
+        name = app.getUser();
+        userName.setText(name);
     }
     @Override
     public void onDestroy() {
