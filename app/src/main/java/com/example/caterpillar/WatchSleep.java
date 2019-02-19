@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class WatchSleep extends Activity implements DataClient.OnDataChangedListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final String COUNT_KEY = "com.example.watchsleep.count";
+    private static final String COUNT_KEY = "com.example.caterpillar.count";
 
     private DataClient mDataClient;
 
