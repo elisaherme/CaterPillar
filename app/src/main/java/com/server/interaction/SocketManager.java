@@ -32,7 +32,7 @@ public class SocketManager extends Application {
         return caregiver;
     }
 
-    public void setCaregiver(String craegiver) {
+    public void setCaregiver(String caregiver) {
         this.caregiver = caregiver;
     }
 

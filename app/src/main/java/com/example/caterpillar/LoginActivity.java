@@ -62,11 +62,13 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         String message = data.getString("Success");
                         String user = data.getString("Name");
+                        String caregiver = data.getString("Caregiver");
                         Log.i ("loginAuth",message);
                         if (message.equals("Success")) {
                             Log.i ("loginAuth","Starting new intent");
                             Toast.makeText(LoginActivity.this, "Welcome " +  user , Toast.LENGTH_SHORT).show();
                             app.setUser(user);
+                            app.setCaregiver(caregiver);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }else {
