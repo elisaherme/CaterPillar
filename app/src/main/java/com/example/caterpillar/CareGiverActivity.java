@@ -58,7 +58,7 @@ public class CareGiverActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void onClickUser(View view) {
-        Intent intent = new Intent(this, pillbox.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

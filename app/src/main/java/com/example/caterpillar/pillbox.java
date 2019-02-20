@@ -78,6 +78,11 @@ public class pillbox extends AppCompatActivity {
         mSocket.off("responseMed", fillPillbox);
     }
 
+    public void onClickUser(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     private Emitter.Listener fillPillbox = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
