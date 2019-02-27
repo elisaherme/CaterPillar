@@ -23,6 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="81dp"
+        android:onClick="stopSleeping"
         android:text="@string/wake_button_title" />
 
     <!--<Button-->

@@ -30,19 +30,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text"
-                android:layout_alignTop="@+id/wakeButton"
-                android:layout_alignParentStart="true"
-                android:layout_gravity="end|top"
+                android:layout_centerHorizontal="true"
+                android:onClick="startSleeping"
                 android:text="@string/sleep_button_title" />
 
-            <Button
-                android:id="@+id/wakeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text"
-                android:layout_gravity="end|top"
-                android:layout_toEndOf="@+id/sleepButton"
-                android:text="@string/wake_button_title" />
+            <!--<Button-->
+                <!--android:id="@+id/wakeButton"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/text"-->
+                <!--android:layout_gravity="end|top"-->
+                <!--android:layout_toEndOf="@+id/sleepButton"-->
+                <!--android:text="@string/wake_button_title" />-->
 
         </RelativeLayout>
 

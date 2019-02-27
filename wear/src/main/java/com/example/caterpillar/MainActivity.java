@@ -41,44 +41,21 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
 
     TextView mTextView;
 
-    private void initButtons(){
-        sleepButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                isMeasuring = true;
-                // go to ambient mode
-                setContentView(R.layout.sensor);
-
-                // Start listening on button click
-                mSensorManager.registerListener(mSensorReader, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
-            }
-        });
-
-        wakeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                isMeasuring = false;
-                setContentView(R.layout.activity_main);
-                mTextView.setText("You woke up!");
-            }
-        });
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         mTextView = findViewById(R.id.text);
-        sleepButton = findViewById(R.id.sleepButton);
-        wakeButton = findViewById(R.id.wakeButton);
-        isMeasuring = false;
+        nextDosageTime = "Hello! It's not time for your next dosage yet!";
 
         // Sensor-related instantiations
         mSensorReader = new SensorReader(this); // new listener
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        initButtons();
+        // Set up rest of the home screen
+        homeScreen();
 
         // Enables Always-on
         setAmbientEnabled();
@@ -87,11 +64,37 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         mDataClient = Wearable.getDataClient(this);
     }
 
+    private void homeScreen(){
+        mTextView.setText(nextDosageTime);
+        sleepButton = findViewById(R.id.sleepButton);
+        isMeasuring = false;
+
+        // Stop listening to accelerometer data
+        mSensorManager.unregisterListener(mSensorReader);
+    }
+
+
+    public void startSleeping(View view){
+        isMeasuring = true;
+        setContentView(R.layout.sensor);
+
+        // Start listening to accelerometer data
+        mSensorManager.registerListener(mSensorReader, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    public void stopSleeping(View view){
+        setContentView(R.layout.activity_main);
+        homeScreen();
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume");
         Wearable.getDataClient(this).addListener(this);
+
+        mTextView.setText(nextDosageTime);
     }
 
     @Override
@@ -101,9 +104,11 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         Wearable.getDataClient(this).removeListener(this);
     }
 
+
+    // Receive and save next dosage time from the phone/tablet app
     @Override
     public void onDataChanged(DataEventBuffer dataEvents) {
-        Log.d(TAG, "onDataChanged");
+        //Log.d(TAG, "onDataChanged");
         for (DataEvent event : dataEvents) {
             if (event.getType() == DataEvent.TYPE_DELETED) {
                 Log.i(TAG, "DataItem deleted: " + event.getDataItem().getUri());
@@ -138,10 +143,11 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
                 });
     }
 
+    // save next dosage time in a variable
     private void updateSchedule(String time) {
-        nextDosageTime = time;
-        Log.d(TAG, "received next dosage time: " + nextDosageTime);
+        nextDosageTime = "The time for your next dose is: " + time;
+        Log.d(TAG, "received next dosage time: " + time);
 
-        mTextView.setText(nextDosageTime);
+//        mTextView.setText("The time for your next dose is: " + nextDosageTime);
     }
 }
