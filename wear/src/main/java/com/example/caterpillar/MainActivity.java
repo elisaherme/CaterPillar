@@ -1,6 +1,7 @@
 package com.example.caterpillar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -64,6 +65,22 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         mDataClient = Wearable.getDataClient(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+        Wearable.getDataClient(this).addListener(this);
+
+        mTextView.setText(nextDosageTime);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
+        Wearable.getDataClient(this).removeListener(this);
+    }
+
     private void homeScreen(){
         mTextView.setText(nextDosageTime);
         sleepButton = findViewById(R.id.sleepButton);
@@ -80,28 +97,18 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
 
         // Start listening to accelerometer data
         mSensorManager.registerListener(mSensorReader, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
+
+        // http://coderzpassion.com/implement-service-android/
+        Intent intent = new Intent(this, SensorReader.class);
+        startService(intent);
+
     }
 
     public void stopSleeping(View view){
+        Intent intent = new Intent(this, SensorReader.class);
+        stopService(intent);
         setContentView(R.layout.activity_main);
         homeScreen();
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-        Wearable.getDataClient(this).addListener(this);
-
-        mTextView.setText(nextDosageTime);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-        Wearable.getDataClient(this).removeListener(this);
     }
 
 
