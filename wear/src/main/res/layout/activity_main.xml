@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@android:color/background_light"
     android:padding="@dimen/box_inset_layout_padding"
     tools:context=".MainActivity"
     tools:deviceIds="wear">
@@ -23,16 +23,22 @@
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hello_world" />
+                android:layout_above="@id/sleepButton"
+                android:text="@string/hello_world"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark" />
 
             <Button
                 android:id="@+id/sleepButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:onClick="startSleeping"
-                android:text="@string/sleep_button_title" />
+                android:text="@string/sleep_button_title"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/background_light"
+                android:textAlignment="center" />
 
             <!--<Button-->
                 <!--android:id="@+id/wakeButton"-->
