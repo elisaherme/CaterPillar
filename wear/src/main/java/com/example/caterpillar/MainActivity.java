@@ -61,20 +61,13 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         mDataClient = Wearable.getDataClient(this);
 
         // layout shenanigans depend on state of user: sleep or awake
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // seems redundant, but nec for onResume to set textview
         mTextView = findViewById(R.id.text);
         isMeasuring = false;
 
         // get state: isMeasuring, rewrite current isMeasuring to saved version
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         isMeasuring = sharedPref.getBoolean("isMeasuring", isMeasuring);
-
-        if (isMeasuring){
-            Log.d(TAG, "isMeasuring in onResume");
-        }
-        else {
-            Log.d(TAG, "notMeasuring in onResume");
-        }
 
         // get next dosage time
         nextDosageTime = sharedPref.getString("nextDosageTime", " ");
@@ -112,6 +105,12 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
 
     public void startSleeping(View view){
         isMeasuring = true;
+
+        // make sure it was from button click
+        if (view!=null){
+            sendCurTime("/start_time");
+        }
+
         setContentView(R.layout.sensor);
 
         // Start listening to accelerometer data
@@ -134,6 +133,12 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     public void stopSleeping(View view){
         Intent intent = new Intent(this, SensorReader.class);
         stopService(intent);
+
+        // make sure it was from button click
+        if(view!=null){
+            sendCurTime("/stop_time");
+        }
+
 
         setContentView(R.layout.activity_main);
         mTextView = findViewById(R.id.text);
@@ -188,6 +193,28 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
                         Log.i(TAG, "Sending sensor readings was successful: " + dataItem);
                     }
                 });
+    }
+
+    // state HAS TO BE either "/start_time" or "/stop_time"
+    private void sendCurTime(String state) {
+        Log.d(TAG, "sending current time");
+        final long t = System.currentTimeMillis();
+
+        PutDataMapRequest putDataMapReq = PutDataMapRequest.create(state);
+        putDataMapReq.getDataMap().putLong(COUNT_KEY, t);
+
+        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
+
+        // Send data
+        Task<DataItem> putDataTask = mDataClient.putDataItem(putDataReq);
+        putDataTask.addOnSuccessListener(
+                new OnSuccessListener<DataItem>() {
+                    @Override
+                    public void onSuccess(DataItem dataItem) {
+                        Log.i(TAG, "Sending current time was successful: " + t);
+                    }
+                });
+
     }
 
     // save next dosage time in a variable
