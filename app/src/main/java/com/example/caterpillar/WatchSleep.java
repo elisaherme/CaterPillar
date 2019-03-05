@@ -67,6 +67,14 @@ public class WatchSleep extends Activity implements DataClient.OnDataChangedList
                     DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
                     updateCount(dataMap.getStringArrayList(COUNT_KEY));
                 }
+                else if (item.getUri().getPath().compareTo("/start_time") == 0) {
+                    DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
+                    updateSleepTime(dataMap.getString(COUNT_KEY));
+                }
+                else if (item.getUri().getPath().compareTo("/stop_time") == 0) {
+                    DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
+                    updateSleepTime(dataMap.getString(COUNT_KEY));
+                }
             }
             else if (event.getType() == DataEvent.TYPE_DELETED) {
                 // DataItem deleted
@@ -119,6 +127,10 @@ public class WatchSleep extends Activity implements DataClient.OnDataChangedList
                         Log.i(TAG, "Sending time was successful: " + dataItem);
                     }
                 });
+    }
+
+    private void updateSleepTime(String t) {
+        // do something
     }
 
 }
