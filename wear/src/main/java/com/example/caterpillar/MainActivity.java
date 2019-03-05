@@ -2,9 +2,11 @@ package com.example.caterpillar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
 import android.view.View;
@@ -45,24 +47,48 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
-        mTextView = findViewById(R.id.text);
-        nextDosageTime = "Hello! It's not time for your next dosage yet!";
+        Log.d(TAG, "onCreate");
 
         // Sensor-related instantiations
         mSensorReader = new SensorReader(this); // new listener
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        // Set up rest of the home screen
-        homeScreen();
-
         // Enables Always-on
         setAmbientEnabled();
 
         // Instantiate API client for sending data to phone
         mDataClient = Wearable.getDataClient(this);
+
+        // layout shenanigans depend on state of user: sleep or awake
+        setContentView(R.layout.activity_main);
+        mTextView = findViewById(R.id.text);
+        isMeasuring = false;
+
+        // get state: isMeasuring, rewrite current isMeasuring to saved version
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        isMeasuring = sharedPref.getBoolean("isMeasuring", isMeasuring);
+
+        if (isMeasuring){
+            Log.d(TAG, "isMeasuring in onResume");
+        }
+        else {
+            Log.d(TAG, "notMeasuring in onResume");
+        }
+
+        // get next dosage time
+        nextDosageTime = sharedPref.getString("nextDosageTime", " ");
+        if(nextDosageTime==" "){
+            nextDosageTime = "Hello! It's not time for your next dosage yet!";
+        }
+
+        if(isMeasuring){
+            startSleeping(null);
+        }
+        else{
+            stopSleeping(null);
+        }
+
     }
 
     @Override
@@ -71,6 +97,7 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         Log.d(TAG, "onResume");
         Wearable.getDataClient(this).addListener(this);
 
+        // phone might have sent an update when app was paused
         mTextView.setText(nextDosageTime);
     }
 
@@ -79,15 +106,7 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         super.onPause();
         Log.d(TAG, "onPause");
         Wearable.getDataClient(this).removeListener(this);
-    }
 
-    private void homeScreen(){
-        mTextView.setText(nextDosageTime);
-        sleepButton = findViewById(R.id.sleepButton);
-        isMeasuring = false;
-
-        // Stop listening to accelerometer data
-        mSensorManager.unregisterListener(mSensorReader);
     }
 
 
@@ -96,19 +115,40 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         setContentView(R.layout.sensor);
 
         // Start listening to accelerometer data
-        mSensorManager.registerListener(mSensorReader, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
-
         // http://coderzpassion.com/implement-service-android/
+        mSensorManager.registerListener(mSensorReader, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
         Intent intent = new Intent(this, SensorReader.class);
         startService(intent);
 
+        // save state: isMeasuring aka isSleeping
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("isMeasuring", true);
+        editor.apply();
+
+        if(isMeasuring){
+            Log.d(TAG, "in startSleeping, isMeasuring");
+        }
     }
 
     public void stopSleeping(View view){
         Intent intent = new Intent(this, SensorReader.class);
         stopService(intent);
+
         setContentView(R.layout.activity_main);
-        homeScreen();
+        mTextView = findViewById(R.id.text);
+        mTextView.setText(nextDosageTime);
+        sleepButton = findViewById(R.id.sleepButton);
+
+        // Stop listening to accelerometer data
+        mSensorManager.unregisterListener(mSensorReader);
+        isMeasuring = false;
+
+        // save state: !isMeasuring aka !isSleeping
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("isMeasuring", false);
+        editor.apply();
     }
 
 
@@ -154,6 +194,11 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     private void updateSchedule(String time) {
         nextDosageTime = "The time for your next dose is: " + time;
         Log.d(TAG, "received next dosage time: " + time);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("nextDosageTime", nextDosageTime);
+        editor.apply();
 
 //        mTextView.setText("The time for your next dose is: " + nextDosageTime);
     }
