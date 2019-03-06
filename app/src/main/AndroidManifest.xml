@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+<<<<<<< HEAD
+=======
+
+        <receiver android:name=".AlarmReceiver"/>
+        <activity android:name=".AlarmActivity" />
+>>>>>>> cd01d9ad9202ef600d614694939217fbea66797d
         <activity android:name=".AddMedicationActivity" />
         <activity android:name=".QuestionsActivity" />
         <activity android:name=".CareGiverActivity" />

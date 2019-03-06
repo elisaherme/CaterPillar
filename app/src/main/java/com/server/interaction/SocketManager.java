@@ -12,9 +12,15 @@ import java.net.URISyntaxException;
 //  keep the global state of my application
 public class SocketManager extends Application {
     private Socket mSocket;
+<<<<<<< HEAD
 //    private static final String URL = "http://35.246.29.217:65080/";
     private static final String URL = "http://146.169.166.31:65080/";
+=======
+    private static final String URL = "http://35.246.29.217:65080/";
+//    private static final String URL = "http://192.168.0.24:65080/";
+>>>>>>> cd01d9ad9202ef600d614694939217fbea66797d
     private static  String user;
+    private static  String caregiver;
     public SocketManager(){
         //initialize maybe with default values if any based on use case
     }
@@ -25,6 +31,14 @@ public class SocketManager extends Application {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getCaregiver() {
+        return caregiver;
+    }
+
+    public void setCaregiver(String caregiver) {
+        this.caregiver = caregiver;
     }
 
     @Override

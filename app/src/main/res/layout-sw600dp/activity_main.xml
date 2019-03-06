@@ -6,20 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <android.support.design.button.MaterialButton
+        android:id="@+id/register_button2"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:background="@color/colorPrimary"
+        android:onClick="onClickSignOut"
+        android:text="SIGN OUT"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/design_default_color_primary"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.985"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.968" />
+
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="382dp"
-        android:layout_height="46dp"
+        android:layout_width="520dp"
+        android:layout_height="69dp"
         android:text="Welcome to CaterPillar"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="36sp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.106" />
 
     <ImageButton
         android:id="@+id/imageButtonUser"
@@ -67,8 +90,9 @@
         android:id="@+id/textView"
         android:layout_width="232dp"
         android:layout_height="0dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="52dp"
         android:text="Who is using?"
+        android:textColor="@color/colorPrimary"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +105,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Moanna"
+        android:textColor="@color/colorPrimary"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.325"
@@ -94,23 +119,31 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Maui"
+        android:textColor="@color/colorPrimary"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.681"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonCaregiver" />
 
-    <Button
-        android:id="@+id/buttonManageProfile"
-        android:layout_width="250dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="440dp"
-        android:layout_marginBottom="16dp"
-        android:text="Manage Profiles"
-        android:textSize="24sp"
+    <android.support.design.button.MaterialButton
+        android:id="@+id/register_button"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="320dp"
+        android:layout_height="65dp"
+        android:background="@color/colorPrimary"
+        android:text="MANAGE PROFILES"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:onClick="onClickManage"
+        app:backgroundTint="@color/colorAccent"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.828" />
 
 </android.support.constraint.ConstraintLayout>

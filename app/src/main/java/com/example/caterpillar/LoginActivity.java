@@ -25,12 +25,13 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUsernameView;
     private EditText mPasswordView;
     private Socket mSocket;
+    private SocketManager app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        SocketManager app = (SocketManager) getApplication();
+        app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
 
         // Set up the login details
@@ -47,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSocket.disconnect();
         mSocket.off("LoginAuth", LoginAuth);
     }
     private Emitter.Listener LoginAuth = new Emitter.Listener() {
@@ -59,12 +59,15 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject data = (JSONObject) args[0];
                     Log.i ("Received JSON Data" , data.toString());
                     try {
-                        String message = data.getString("Success");
-                        String user = data.getString("Name");
+                        String message = data.getString("state");
+                        String user = data.getString("name");
+                        String caregiver = data.getString("caregiver");
                         Log.i ("loginAuth",message);
                         if (message.equals("Success")) {
                             Log.i ("loginAuth","Starting new intent");
                             Toast.makeText(LoginActivity.this, "Welcome " +  user , Toast.LENGTH_SHORT).show();
+                            app.setUser(user);
+                            app.setCaregiver(caregiver);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }else {
