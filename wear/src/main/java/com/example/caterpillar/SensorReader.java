@@ -20,10 +20,9 @@ public class SensorReader extends Service implements SensorEventListener {
 
 
     // https://stackoverflow.com/questions/7836415/call-a-public-method-in-the-activity-class-from-another-class#comment9554272_7836465
-    private MainActivity mActivity;
-    // Constructor for class SensorReader to accept activity as arg
-    public SensorReader(MainActivity activity) {
-        mActivity = activity;
+    private SensorDataSender mSensorDataSender;
+    public SensorReader(SensorDataSender sender) {
+        mSensorDataSender = sender;
     }
 
     private static final String TAG = SensorReader.class.getSimpleName();
@@ -51,8 +50,7 @@ public class SensorReader extends Service implements SensorEventListener {
 
         // Don't send data too frequently -> TODO: experiment with rates
         if(accelerometerData.size() == 200) {
-            mActivity.sendData(accelerometerData);
-
+            mSensorDataSender.sendData(accelerometerData);
             accelerometerData.clear();
         }
 

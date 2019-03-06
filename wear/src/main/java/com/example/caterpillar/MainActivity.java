@@ -36,9 +36,6 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     private Button sleepButton;
     private Button wakeButton;
     private boolean isMeasuring;
-    private SensorReader mSensorReader; // implements SensorEventListener
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
 
     private String nextDosageTime;
 
@@ -48,11 +45,6 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
-
-        // Sensor-related instantiations
-        mSensorReader = new SensorReader(this); // new listener
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         // Enables Always-on
         setAmbientEnabled();
@@ -99,7 +91,6 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         super.onPause();
         Log.d(TAG, "onPause");
         Wearable.getDataClient(this).removeListener(this);
-
     }
 
 
@@ -113,26 +104,21 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
 
         setContentView(R.layout.sensor);
 
-        // Start listening to accelerometer data
+        // Will start listening to accelerometer data in SensorDataSender
         // http://coderzpassion.com/implement-service-android/
-        mSensorManager.registerListener(mSensorReader, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
-        Intent intent = new Intent(this, SensorReader.class);
-        startService(intent);
+        Intent sendIntent = new Intent(this, SensorDataSender.class);
+        startService(sendIntent);
 
         // save state: isMeasuring aka isSleeping
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("isMeasuring", true);
         editor.apply();
-
-        if(isMeasuring){
-            Log.d(TAG, "in startSleeping, isMeasuring");
-        }
     }
 
     public void stopSleeping(View view){
-        Intent intent = new Intent(this, SensorReader.class);
-        stopService(intent);
+        Intent sendIntent = new Intent(this, SensorDataSender.class);
+        stopService(sendIntent);
 
         // make sure it was from button click
         if(view!=null){
@@ -145,8 +131,6 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         mTextView.setText(nextDosageTime);
         sleepButton = findViewById(R.id.sleepButton);
 
-        // Stop listening to accelerometer data
-        mSensorManager.unregisterListener(mSensorReader);
         isMeasuring = false;
 
         // save state: !isMeasuring aka !isSleeping
@@ -173,26 +157,6 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
                 }
             }
         }
-    }
-
-    // SensorReader.OnSensorChanged() is calling this once for every 200 readings
-    public void sendData(ArrayList<String> accelerometerData) {
-        Log.d(TAG, "sending data: " + accelerometerData);
-
-        PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/acc_data"); // create data map
-        putDataMapReq.getDataMap().putStringArrayList(COUNT_KEY, accelerometerData); // put data in map
-
-        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
-
-        // Send data
-        Task<DataItem> putDataTask = mDataClient.putDataItem(putDataReq);
-        putDataTask.addOnSuccessListener(
-                new OnSuccessListener<DataItem>() {
-                    @Override
-                    public void onSuccess(DataItem dataItem) {
-                        Log.i(TAG, "Sending sensor readings was successful: " + dataItem);
-                    }
-                });
     }
 
     // state HAS TO BE either "/start_time" or "/stop_time"
