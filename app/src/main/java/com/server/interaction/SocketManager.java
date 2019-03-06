@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 public class SocketManager extends Application {
     private Socket mSocket;
 //    private static final String URL = "http://35.246.29.217:65080/";
-    private static final String URL = "http://192.168.0.24:65080/";
+    private static final String URL = "http://146.169.166.31:65080/";
     private static  String user;
     public SocketManager(){
         //initialize maybe with default values if any based on use case

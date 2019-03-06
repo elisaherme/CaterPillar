@@ -19,7 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WatchSleep" />
         <activity android:name=".AddMedicationActivity" />
         <activity android:name=".QuestionsActivity" />
         <activity android:name=".CareGiverActivity" />
@@ -33,6 +32,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <service
+            android:name=".WatchSleep"
+            android:enabled="true"
+            />
     </application>
 
 </manifest>
