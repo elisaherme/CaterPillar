@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.github.nkzawa.socketio.client.Socket;
 import com.server.interaction.SocketManager;
@@ -36,10 +37,15 @@ public class AddMedicationActivity extends AppCompatActivity {
     private RadioGroup radioGroupMeal;
     private RadioButton radioButton;
 
+    private String name;
+    private TextView userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medication);
+
+        SocketManager app = (SocketManager) getApplication();
 
         editName = (EditText) findViewById(R.id.editName);
         editInstruction = (EditText) findViewById(R.id.editInstruction);
@@ -56,6 +62,9 @@ public class AddMedicationActivity extends AppCompatActivity {
         checkBoxAfternoon = ((CheckBox) findViewById(R.id.checkBoxAfternoon));
         checkBoxNight = ((CheckBox) findViewById(R.id.checkBoxNight));
 
+        userName = findViewById(R.id.textPatientName);
+        name = app.getUser();
+        userName.setText(name);
     }
 
     public void onClickConfirm(View view) {
