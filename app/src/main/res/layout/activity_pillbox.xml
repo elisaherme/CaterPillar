@@ -198,6 +198,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="188dp"
         android:layout_marginTop="28dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -208,6 +209,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="360dp"
         android:layout_marginTop="28dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -218,6 +220,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="536dp"
         android:layout_marginTop="28dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -228,6 +231,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="712dp"
         android:layout_marginTop="28dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -238,6 +242,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="884dp"
         android:layout_marginTop="28dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -248,6 +253,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="1056dp"
         android:layout_marginTop="28dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -258,6 +264,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="1056dp"
         android:layout_marginTop="200dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -268,6 +275,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="1056dp"
         android:layout_marginTop="376dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -278,6 +286,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="884dp"
         android:layout_marginTop="200dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -288,6 +297,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="884dp"
         android:layout_marginTop="376dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -298,6 +308,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="712dp"
         android:layout_marginTop="200dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -308,6 +319,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="712dp"
         android:layout_marginTop="376dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -318,6 +330,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="536dp"
         android:layout_marginTop="200dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -328,6 +341,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="536dp"
         android:layout_marginTop="376dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -338,6 +352,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="360dp"
         android:layout_marginTop="200dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -348,6 +363,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="360dp"
         android:layout_marginTop="376dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -538,6 +554,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="200dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -548,6 +565,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="188dp"
         android:layout_marginTop="200dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -558,6 +576,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="188dp"
         android:layout_marginTop="376dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
@@ -568,6 +587,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="376dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:srcCompat="@android:drawable/stat_notify_error" />
