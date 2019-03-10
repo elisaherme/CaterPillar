@@ -16,8 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".IntakeActivity"></activity>
 
-        <receiver android:name=".AlarmReceiver"/>
+        <receiver android:name=".AlarmReceiver" />
+
         <activity android:name=".AlarmActivity" />
         <activity android:name=".AddMedicationActivity" />
         <activity android:name=".QuestionsActivity" />

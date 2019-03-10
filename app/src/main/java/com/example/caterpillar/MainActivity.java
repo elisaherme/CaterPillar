@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private String caregiver;
     private TextView userName;
     private TextView careGiver;
+    private Button b1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         userName = findViewById(R.id.textView5);
         careGiver = findViewById(R.id.textView6);
+        b1 = (Button)findViewById(R.id.register_button);
 
         final SocketManager app = (SocketManager) getApplication();
 
@@ -29,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         caregiver = app.getCaregiver();
         userName.setText(name);
         careGiver.setText(caregiver);
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                app.sendNotification();
+            }
+        });
     }
 
     public void onClickUser(View view) {
@@ -41,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickManage(View view) {
-        Intent intent = new Intent(this, AlarmActivity.class);
-        startActivity(intent);
-    }
+//    public void onClickManage(View view) {
+//        Intent intent = new Intent(this, AlarmActivity.class);
+//        startActivity(intent);
+
+//    }
 
     public void onClickSignOut(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
