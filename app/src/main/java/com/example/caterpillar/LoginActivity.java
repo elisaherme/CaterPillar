@@ -43,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Not Connected!!", Toast.LENGTH_SHORT).show();
         }
         mSocket.on("LoginAuth", LoginAuth);
+
+        Intent sleepIntent = new Intent(this, WatchSleep.class);
+        startService(sleepIntent);
     }
 
     @Override
@@ -91,8 +94,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
 
-        Intent sleepIntent = new Intent(this, WatchSleep.class);
-        startService(sleepIntent);
+//        Intent sleepIntent = new Intent(this, WatchSleep.class);
+//        startService(sleepIntent);
     }
 
     public void onClickLogin(View view) {

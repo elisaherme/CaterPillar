@@ -1,6 +1,7 @@
 package com.server.interaction;
 import android.app.Application;
 import android.app.Notification;
+import android.app.NotificationChannelGroup;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -101,6 +102,7 @@ public class SocketManager extends Application {
 
         builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         builder.extend(new NotificationCompat.WearableExtender());
+        builder.setPriority(NotificationCompat.PRIORITY_MAX);
         // END_INCLUDE (build_notification)
 
         // BEGIN_INCLUDE(send_notification)
