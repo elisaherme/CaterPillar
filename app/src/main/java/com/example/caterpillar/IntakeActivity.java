@@ -31,7 +31,7 @@ public class IntakeActivity extends AppCompatActivity {
     }
 
     public void onClickTaken(View view) {
-        Intent intent = new Intent(this, AlarmActivity.class);
+        Intent intent = new Intent(this, pillbox.class);
         startActivity(intent);
     }
 

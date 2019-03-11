@@ -17,5 +17,7 @@
         completions."
     </string>
     <string name="encrypt_key">"Two One Nine Two"</string>
+    <string name="send_time">UPDATE DOSAGE TIME</string>
+    <string name="init_phone">No data has been received from the wearable yet</string>
 
 </resources>

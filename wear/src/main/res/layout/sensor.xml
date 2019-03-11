@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/inner_frame_layout_padding"
+        app:boxedEdges="all">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/readings_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/wakeButton"
+                android:textColor="@android:color/background_dark"
+                android:textAlignment="center"
+                android:text="@string/in_bed" />
+
+            <Button
+                android:id="@+id/wakeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:onClick="stopSleeping"
+                android:textColor="@android:color/background_light"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/wake_button_title"
+                android:textAlignment="center"
+                />
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/start_button_title"-->
+    <!--android:id="@+id/startButton"-->
+    <!--android:layout_gravity="right|top"-->
+    <!--android:layout_alignTop="@+id/stopButton"-->
+    <!--android:layout_alignParentStart="true" />-->
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/stop_button_title"-->
+    <!--android:id="@+id/stopButton"-->
+    <!--android:layout_gravity="right|bottom"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_toEndOf="@+id/startButton" />-->
+        </RelativeLayout>
+
+
+    </FrameLayout>
+</android.support.wear.widget.BoxInsetLayout>
