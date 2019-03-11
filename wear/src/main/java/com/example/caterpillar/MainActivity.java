@@ -44,7 +44,7 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate");
+        Log.i(TAG, "onCreate");
 
         // Enables Always-on
         setAmbientEnabled();
@@ -64,7 +64,8 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
         // get next dosage time
         nextDosageTime = sharedPref.getString("nextDosageTime", " ");
         if(nextDosageTime==" "){
-            nextDosageTime = "Hello! It's not time for your next dosage yet!";
+            //nextDosageTime = "Hello! It's not time for your next dosage yet!";
+            nextDosageTime = "The time for your next dose is: 10.45am";
         }
 
         if(isMeasuring){
@@ -79,7 +80,7 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume");
+        Log.i(TAG, "onResume");
         Wearable.getDataClient(this).addListener(this);
 
         // phone might have sent an update when app was paused
@@ -89,7 +90,7 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG, "onPause");
+        Log.i(TAG, "onPause");
         Wearable.getDataClient(this).removeListener(this);
     }
 
@@ -161,7 +162,7 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
 
     // state HAS TO BE either "/start_time" or "/stop_time"
     private void sendCurTime(String state) {
-        Log.d(TAG, "sending current time");
+        Log.i(TAG, "sending current time");
         final long t = System.currentTimeMillis();
 
         PutDataMapRequest putDataMapReq = PutDataMapRequest.create(state);
@@ -184,7 +185,7 @@ public class MainActivity extends WearableActivity implements DataClient.OnDataC
     // save next dosage time in a variable
     private void updateSchedule(String time) {
         nextDosageTime = "The time for your next dose is: " + time;
-        Log.d(TAG, "received next dosage time: " + time);
+        Log.i(TAG, "received next dosage time: " + time);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();

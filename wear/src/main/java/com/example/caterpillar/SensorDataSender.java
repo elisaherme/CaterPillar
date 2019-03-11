@@ -30,7 +30,7 @@ public class SensorDataSender extends Service {
 
     // SensorReader.OnSensorChanged() is calling this once for every 200 readings
     public void sendData(ArrayList<String> accelerometerData) {
-        Log.d(TAG, "sending data: " + accelerometerData);
+        Log.i(TAG, "sending data: " + accelerometerData);
 
         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/acc_data"); // create data map
         putDataMapReq.getDataMap().putStringArrayList(COUNT_KEY, accelerometerData); // put data in map
@@ -52,14 +52,17 @@ public class SensorDataSender extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "in SensorDataSender onStartCommand");
+        Log.i(TAG, "in SensorDataSender onStartCommand");
 
         mSensorReader = new SensorReader(this);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         // Start listening to accelerometer data
+        // https://developer.android.com/reference/android/hardware/SensorManager#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)
+        //mSensorManager.registerListener(mSensorReader, mAccelerometer, 1000000, 1000000);
         mSensorManager.registerListener(mSensorReader, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
+
 
         Intent sensorIntent = new Intent(this, SensorReader.class);
         startService(sensorIntent);
@@ -72,7 +75,7 @@ public class SensorDataSender extends Service {
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "in SensorDataSender onDestroy");
+        Log.i(TAG, "in SensorDataSender onDestroy");
 
         // Stop listening to accelerometer data
         mSensorManager.unregisterListener(mSensorReader);

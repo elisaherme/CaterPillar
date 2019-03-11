@@ -76,7 +76,7 @@ public class SensorReader extends Service implements SensorEventListener {
 
     @Override
     public void onDestroy(){
-        Log.d(TAG, "in onDestroy");
+        Log.i(TAG, "in onDestroy");
         isMeasuring = false;
     }
 }
