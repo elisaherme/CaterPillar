@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,12 +18,18 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class pillbox extends AppCompatActivity {
     private Socket mSocket;
     private final String [] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     private final String [] times = {"Mor", "Aft", "Ngt"};
     private final String [] fulltimes = {"Morning", "Afternoon", "Night"};
+//    private final Map<String, String> DayTime_to_Index = new HashMap<String, String>() {{
+//        put("foo", "bar");
+//        put("key", "value");
+//        //etc
+//    }};
 
     private String name;
     private TextView userName;
@@ -83,6 +90,31 @@ public class pillbox extends AppCompatActivity {
         startActivity(intent);
     }
 
+//    private  void updateEmptyStatus() {
+//        TextView textSlot;
+//        ImageView imageSlot;
+//        for(String day : days) {
+//            for(String time : times){
+//                String slotID = "text" + day + time;
+//                int resID = getResources().getIdentifier(slotID, "id", getPackageName());
+//                textSlot = findViewById(resID);
+//
+//                slotID = "empty" + day + time;
+//                resID = getResources().getIdentifier(slotID, "id", getPackageName());
+//                imageSlot = findViewById(resID);
+//
+//                if(textSlot.getText().toString() == ""){
+//                    imageSlot.setVisibility(View.INVISIBLE);
+//                }
+//                else if(pillboxempty){
+//                    imageSlot.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        }
+//
+//    }
+
+
     private Emitter.Listener fillPillbox = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -95,17 +127,21 @@ public class pillbox extends AppCompatActivity {
 
                     TextView textSlot;
                     TextView textMedicationDetail = (TextView) findViewById(R.id.textMonMor);
+                    ImageView imageSlot;
                     try {
-                        for(String day : days){
+                        for(String day : days) {
                             for(String time : times){
                                 String slotID = "text" + day + time;
                                 int resID = getResources().getIdentifier(slotID, "id", getPackageName());
                                 textSlot = findViewById(resID);
                                 textSlot.setText("");
+
+                                slotID = "empty" + day + time;
+                                resID = getResources().getIdentifier(slotID, "id", getPackageName());
+                                imageSlot = findViewById(resID);
+                                imageSlot.setVisibility(View.VISIBLE);
                             }
                         }
-
-
 
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject obj = data.getJSONObject(i);
@@ -125,7 +161,6 @@ public class pillbox extends AppCompatActivity {
 
                                 }
                             }
-
                         }
 
                     }
