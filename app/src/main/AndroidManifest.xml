@@ -19,7 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".IntakeActivity"></activity>
+        <activity android:name=".IntakeActivity"
+            android:launchMode="singleTop">
+
+        </activity>
 
         <receiver android:name=".AlarmReceiver" />
 

@@ -36,6 +36,11 @@ public class QuestionsActivity extends AppCompatActivity {
         final SocketManager app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
         questionAnswers = new JSONObject();
+        addToJSON("Wake","08:30" );
+        addToJSON("Breakfast","09:15" );
+        addToJSON("Lunch","13:00" );
+        addToJSON("Dinner","18:45" );
+        addToJSON("Sleep","23:15" );
         Button registerButton = findViewById(R.id.button_next);
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

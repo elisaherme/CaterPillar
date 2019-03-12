@@ -22,12 +22,29 @@ public class IntakeActivity extends AppCompatActivity {
     private final String [] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     private final String [] times = {"Mor", "Aft", "Ngt"};
     private final String [] fulltimes = {"Morning", "Afternoon", "Night"};
-    private Button b1;
+    private TextView textMedication;
+    private ImageView imageWarning;
+    private TextView textWarning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intake);
+
+        Intent myIntent = getIntent(); // gets the previously created intent
+        String medName = myIntent.getStringExtra("medName");
+        Log.e("INTAKE", medName);
+        textMedication = findViewById(R.id.textPill);
+        textMedication.setText(medName);
+
+        imageWarning = findViewById(R.id.imageWarning);
+        textWarning = findViewById(R.id.textWarning);
+
+        SocketManager app = (SocketManager) getApplication();
+        mSocket = app.getmSocket();
+        mSocket.on("wrong_lid", wrongLid);
+        mSocket.on("correct_lid", correctLid);
+        mSocket.on("intakeDone", intakeDone);
     }
 
     public void onClickTaken(View view) {
@@ -35,63 +52,46 @@ public class IntakeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private Emitter.Listener fillPillbox = new Emitter.Listener() {
-//        @Override
-//        public void call(final Object... args) {
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    JSONArray data = (JSONArray) args[0];
-//                    Log.i ("Received JSON Data" , data.toString());
-//
-//
-//                    TextView textSlot;
-//                    TextView textMedicationDetail = (TextView) findViewById(R.id.textMonMor);
-//                    ImageView imageSlot;
-//                    try {
-//                        for(String day : days) {
-//                            for(String time : times){
-//                                String slotID = "text" + day + time;
-//                                int resID = getResources().getIdentifier(slotID, "id", getPackageName());
-//                                textSlot = findViewById(resID);
-//                                textSlot.setText("");
-//
-//                                slotID = "empty" + day + time;
-//                                resID = getResources().getIdentifier(slotID, "id", getPackageName());
-//                                imageSlot = findViewById(resID);
-//                                imageSlot.setVisibility(View.VISIBLE);
-//                            }
-//                        }
-//
-//                        for (int i = 0; i < data.length(); i++) {
-//                            JSONObject obj = data.getJSONObject(i);
-//                            String medName = obj.getString("Name");
-//
-//                            for(int j=0; j<times.length; j++) {
-//                                if(obj.getBoolean(fulltimes[j])){
-//                                    for( String day : days ) {
-//                                        if(obj.getBoolean(day)){
-//                                            String slotID = "text" + day + times[j];
-//                                            int resID = getResources().getIdentifier(slotID, "id", getPackageName());
-//
-//                                            textSlot = findViewById(resID);
-//                                            textSlot.setText(textSlot.getText().toString() + medName + "\n");
-//                                        }
-//                                    }
-//
-//                                }
-//                            }
-//                        }
-//
-//                    }
-//                    catch (Exception e) {
-//                        Log.e("fillPillbox", e.getMessage());
-//                        return;
-//                    }
-//
-//                }
-//            });
-//        }
-//    };
+    private Emitter.Listener correctLid = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("CORRECT", "correct lid");
+                    imageWarning.setVisibility(View.GONE);
+                    textWarning.setVisibility(View.GONE);
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener wrongLid = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("WRONG", "wrong lid");
+                    imageWarning.setVisibility(View.VISIBLE);
+                    textWarning.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener intakeDone = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("INTAKE", "done");
+                    Intent intent = new Intent(IntakeActivity.this, pillbox.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    };
 
 }
