@@ -78,10 +78,10 @@ public class SocketManager extends Application {
 
     public void sendNotification(int level) {
 
-        // BEGIN_INCLUDE(build_action)
-        Intent intent = new Intent(this, IntakeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+//        // BEGIN_INCLUDE(build_action)
+//        Intent intent = new Intent(this, IntakeActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         // END_INCLUDE(build_action)
 
         // BEGIN_INCLUDE (build_notification)
@@ -90,7 +90,7 @@ public class SocketManager extends Application {
 
         builder.setSmallIcon(R.drawable.caterpillar);
 
-        builder.setContentIntent(pendingIntent);
+//        builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.caterpillar));
 
@@ -119,7 +119,7 @@ public class SocketManager extends Application {
         }
 
         builder.extend(new NotificationCompat.WearableExtender());
-        builder.setPriority(NotificationCompat.PRIORITY_MAX);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         // END_INCLUDE (build_notification)
 
         // BEGIN_INCLUDE(send_notification)
