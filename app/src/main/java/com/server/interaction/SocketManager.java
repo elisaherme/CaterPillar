@@ -19,14 +19,12 @@ import com.github.nkzawa.engineio.client.Transport;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Manager;
 import com.github.nkzawa.socketio.client.Socket;
-
 import java.net.URISyntaxException;
 
 //  keep the global state of my application
 public class SocketManager extends Application {
     private Socket mSocket;
-
-    private static final String URL = "http://35.246.29.217:65080/";
+    private static final String URL = "http://146.169.162.206:65080/";
     //private static final String URL = "http://146.169.166.31:65080/";
     private static  String user;
     private static  String caregiver;
@@ -61,8 +59,6 @@ public class SocketManager extends Application {
             throw new RuntimeException(e);
         }
         mSocket.connect();
-//        FirebaseApp.initializeApp(this);
-
         mSocket.io().on(Manager.EVENT_TRANSPORT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -78,11 +74,9 @@ public class SocketManager extends Application {
                 });
             }
         });
-        //sendNotification();
-        //mSocket.on("Notification", sendNotification);
     }
 
-    public void sendNotification() {
+    public void sendNotification(int level) {
 
         // BEGIN_INCLUDE(build_action)
         Intent intent = new Intent(this, IntakeActivity.class);
@@ -104,7 +98,16 @@ public class SocketManager extends Application {
         builder.setContentText("Don't forget to take your pills :)");
         builder.setSubText("Tap to view details");
 
-        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        if(level == 1) {
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        }
+        else if (level == 2) {
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
+        }
+        else {
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+        }
+
         builder.extend(new NotificationCompat.WearableExtender());
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
         // END_INCLUDE (build_notification)

@@ -32,6 +32,7 @@ public class pillbox extends AppCompatActivity {
 //        //etc
 //    }};
 
+    private SocketManager app;
     private String name;
     private TextView userName;
 
@@ -40,13 +41,15 @@ public class pillbox extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pillbox);
 
-        SocketManager app = (SocketManager) getApplication();
+        app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
         mSocket.on("responseMed", fillPillbox);
         mSocket.emit("queryMed", app.getUser());
         mSocket.on("slot_opened",slotOpen);
         mSocket.on("pill",pillDisplay);
         mSocket.on("pill_presence", updateEmptyStatus);
+        mSocket.on("wrong_lid", warnWrongLid);
+        mSocket.on("startNotification", notification);
         userName = findViewById(R.id.textUsername);
         name = app.getUser();
         userName.setText(name);
@@ -100,6 +103,19 @@ public class pillbox extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
+    private Emitter.Listener warnWrongLid = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                }
+            });
+        }
+    };
+
 
     private Emitter.Listener updateEmptyStatus = new Emitter.Listener() {
         @Override
@@ -265,4 +281,57 @@ public class pillbox extends AppCompatActivity {
 
 
     }
+
+    private Emitter.Listener notification = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        JSONObject data = (JSONObject) args[0];
+                        Log.i ("Received JSON Data" , data.toString());
+
+                        int alertLevel = data.getInt("alertLevel");
+                        int boxSent = data.getInt("boxToSend");
+
+                        TextView textPillbox;
+                        String medName;
+                        switch(boxSent) {
+                            case 1:
+                                textPillbox = findViewById(R.id.textWedMor);
+                                medName = textPillbox.getText().toString();
+                                break;
+                            case 2:
+                                textPillbox = findViewById(R.id.textWedAft);
+                                medName = textPillbox.getText().toString();
+                                break;
+                            case 3:
+                                textPillbox = findViewById(R.id.textThuMor);
+                                medName = textPillbox.getText().toString();
+                                break;
+                            case 4:
+                                textPillbox = findViewById(R.id.textThuAft);
+                                medName = textPillbox.getText().toString();
+                                break;
+                            default:
+                                medName = "";
+                        }
+
+                        app.sendNotification(alertLevel);
+
+                        Intent intent = new Intent(pillbox.this, IntakeActivity.class);
+                        intent.putExtra("medName", medName);
+                        Log.e("PILLBOX", medName);
+                        startActivity(intent);
+                    }
+
+                    catch (Exception e) {
+                        Log.e("startNotification", e.getMessage());
+                        return;
+                    }
+                }
+            });
+        }
+    };
 }
