@@ -111,7 +111,6 @@ public class pillbox extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.e("WARNNNNN", "wrong lid");
                 }
             });
         }
@@ -295,9 +294,35 @@ public class pillbox extends AppCompatActivity {
 
                         int alertLevel = data.getInt("alertLevel");
                         int boxSent = data.getInt("boxToSend");
+
+                        TextView textPillbox;
+                        String medName;
+                        switch(boxSent) {
+                            case 1:
+                                textPillbox = findViewById(R.id.textWedMor);
+                                medName = textPillbox.getText().toString();
+                                break;
+                            case 2:
+                                textPillbox = findViewById(R.id.textWedAft);
+                                medName = textPillbox.getText().toString();
+                                break;
+                            case 3:
+                                textPillbox = findViewById(R.id.textThuMor);
+                                medName = textPillbox.getText().toString();
+                                break;
+                            case 4:
+                                textPillbox = findViewById(R.id.textThuAft);
+                                medName = textPillbox.getText().toString();
+                                break;
+                            default:
+                                medName = "";
+                        }
+
                         app.sendNotification(alertLevel);
 
                         Intent intent = new Intent(pillbox.this, IntakeActivity.class);
+                        intent.putExtra("medName", medName);
+                        Log.e("PILLBOX", medName);
                         startActivity(intent);
                     }
 
