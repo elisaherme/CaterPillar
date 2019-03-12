@@ -63,6 +63,17 @@ public class pillbox extends AppCompatActivity {
                                     findViewById(R.id.emptySatMor), findViewById(R.id.emptySatAft), findViewById(R.id.emptySatNgt)
                                 };
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSocket.off("responseMed", fillPillbox);
+        mSocket.off("slot_opened",slotOpen);
+        mSocket.off("pill",pillDisplay);
+        mSocket.off("pill_presence", updateEmptyStatus);
+        mSocket.off("wrong_lid", warnWrongLid);
+    }
+
     private Emitter.Listener slotOpen = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -90,14 +101,6 @@ public class pillbox extends AppCompatActivity {
             });
         }
     };
-
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mSocket.off("responseMed", fillPillbox);
-    }
 
     public void onClickUser(View view) {
         Intent intent = new Intent(this, MainActivity.class);
