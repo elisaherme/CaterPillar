@@ -156,6 +156,28 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonAddMedication" />
 
     <android.support.design.button.MaterialButton
+        android:id="@+id/buttonAddFaceID"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="300dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="44dp"
+        android:background="@color/colorPrimary"
+        android:onClick="onClickAddFaceID"
+        android:text="Add Face ID"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textMedicationDetail"
+        app:layout_constraintTop_toBottomOf="@+id/buttonClearMedication" />
+
+    <android.support.design.button.MaterialButton
         android:id="@+id/buttonClearHistory"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="300dp"

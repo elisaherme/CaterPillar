@@ -22,8 +22,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,7 +29,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
@@ -54,11 +51,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.server.interaction.SocketManager;
 
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -96,9 +89,9 @@ public final class RecogniseFaceActivity<string> extends AppCompatActivity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setContentView(R.layout.activity_detection);
+        setContentView(R.layout.activity_recognition);
         mStorageRef = FirebaseStorage.getInstance().getReference();
-
+//
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay) findViewById(R.id.faceOverlay);
 
@@ -191,7 +184,12 @@ public final class RecogniseFaceActivity<string> extends AppCompatActivity {
 //        MediaActionSound sound = null;
 
 
-        mCameraSource.takePicture(null, new PictureCallback() {
+        mCameraSource.takePicture(new CameraSource.ShutterCallback() {
+            @Override
+            public void onShutter() {
+            return;
+            }
+        }, new PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data) {
                 File picFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
@@ -225,10 +223,9 @@ public final class RecogniseFaceActivity<string> extends AppCompatActivity {
 //
 //        }
     }
-    private String dirName;
     private File getOutputMediaFile(int type) {
         File dir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "recognition/"+folderName);
-        dirName = dir.getAbsolutePath();
+        String dirName = dir.getAbsolutePath();
         if (!dir.exists()) {
             if (!dir.mkdirs()) {
                 Log.e(TAG, "Failed to create storage directory.");
@@ -245,35 +242,17 @@ public final class RecogniseFaceActivity<string> extends AppCompatActivity {
         }
     }
 
-    private void sendImage(String path)
-    {
-        JSONObject sendData = new JSONObject();
-        try{
-            sendData.put("imageData", encodeImage(path));
-            mSocket.emit("image",sendData);
-        }catch(Exception e){
-            return;
-        }
-    }
+//    private void sendImage(String path)
+//    {
+//        JSONObject sendData = new JSONObject();
+//        try{
+//            sendData.put("imageData", encodeImage(path));
+//            mSocket.emit("image",sendData);
+//        }catch(Exception e){
+//            return;
+//        }
+//    }
 
-    private String encodeImage(String path)
-    {
-        File imagefile = new File(path);
-        FileInputStream fis = null;
-        try{
-            fis = new FileInputStream(imagefile);
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-        Bitmap bm = BitmapFactory.decodeStream(fis);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
-        byte[] b = baos.toByteArray();
-        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
-        //Base64.de
-        return encImage;
-    }
 
     private void sendURL(String url)
     {
@@ -284,7 +263,7 @@ public final class RecogniseFaceActivity<string> extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(File filename)
+    private void uploadImage(final File filename)
     {   Uri fileUri = Uri.fromFile(filename);
         final StorageReference fileRef = mStorageRef.child("recognition/" + folderName + "/" + filename.getName());
         UploadTask uploadTask = fileRef.putFile(fileUri);
@@ -307,6 +286,7 @@ public final class RecogniseFaceActivity<string> extends AppCompatActivity {
 
                     Log.i("URL", downloadUri.toString());
                     sendURL(downloadUri.toString());
+                    filename.delete();
                 } else {
                     // Handle failures
                     // ...
@@ -360,7 +340,6 @@ public final class RecogniseFaceActivity<string> extends AppCompatActivity {
         if (mCameraSource != null) {
             mCameraSource.release();
             File dir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "recognition/"+folderName);
-//                dir.delete();
             dir.setWritable(true);
             delFolder(dir);
             try {

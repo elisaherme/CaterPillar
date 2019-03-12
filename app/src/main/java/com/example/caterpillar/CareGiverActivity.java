@@ -55,7 +55,7 @@ public class CareGiverActivity extends AppCompatActivity {
     }
 
     public void onClickAddFaceID(View view) {
-        Intent intent = new Intent(this, AddMedicationActivity.class);
+        Intent intent = new Intent(this, InitialiseFaceActivity.class);
         startActivity(intent);
     }
 
@@ -63,6 +63,7 @@ public class CareGiverActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 
     private Emitter.Listener medRequest = new Emitter.Listener() {
         @Override

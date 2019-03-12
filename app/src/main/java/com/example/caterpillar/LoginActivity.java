@@ -115,9 +115,5 @@ public class LoginActivity extends AppCompatActivity {
         Log.i("socket", "sent login details");
     }
 
-//    public void onClickAddFaceID(View view) {
-//        Intent intent = new Intent(this, InitialiseFaceActivity.class);
-//        startActivity(intent);
-//
-//    }
+
 }

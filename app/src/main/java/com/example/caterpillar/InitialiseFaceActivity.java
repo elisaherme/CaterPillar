@@ -120,6 +120,7 @@ public final class InitialiseFaceActivity<string> extends AppCompatActivity {
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
             createCameraSource();
+
         } else {
             requestCameraPermission();
         }
@@ -215,7 +216,12 @@ public final class InitialiseFaceActivity<string> extends AppCompatActivity {
 //        MediaActionSound sound = null;
 
 
-        mCameraSource.takePicture(null, new PictureCallback() {
+        mCameraSource.takePicture(new CameraSource.ShutterCallback() {
+            @Override
+            public void onShutter() {
+                return;
+            }
+        }, new PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data) {
                 File picFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
@@ -591,8 +597,8 @@ public final class InitialiseFaceActivity<string> extends AppCompatActivity {
 //                FaceTrackerActivity.this.onPause();
 //                FaceTrackerActivity.this.onStop();
 //                FaceTrackerActivity.this.onDestroy();
-                while (imageCapturedCount!=sentImageCount) {
-                }
+//                while (imageCapturedCount!=sentImageCount) {
+//                }
                 InitialiseFaceActivity.this.finish();
 //                finish();
 //                Intent intent2 = new Intent(FaceTrackerActivity.this, LoginActivity.class);
