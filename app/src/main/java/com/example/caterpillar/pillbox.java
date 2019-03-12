@@ -47,6 +47,7 @@ public class pillbox extends AppCompatActivity {
         mSocket.on("slot_opened",slotOpen);
         mSocket.on("pill",pillDisplay);
         mSocket.on("pill_presence", updateEmptyStatus);
+        mSocket.on("wrong_lid", warnWrongLid);
         userName = findViewById(R.id.textUsername);
         name = app.getUser();
         userName.setText(name);
@@ -100,6 +101,20 @@ public class pillbox extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
+    private Emitter.Listener warnWrongLid = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("WARNNNNN", "wrong lid");
+                }
+            });
+        }
+    };
+
 
     private Emitter.Listener updateEmptyStatus = new Emitter.Listener() {
         @Override
