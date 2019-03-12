@@ -324,6 +324,7 @@ public class pillbox extends AppCompatActivity {
                         intent.putExtra("medName", medName);
                         Log.e("PILLBOX", medName);
                         startActivity(intent);
+                        finish();
                     }
 
                     catch (Exception e) {
