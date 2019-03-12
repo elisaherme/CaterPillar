@@ -118,7 +118,7 @@ public class WatchSleep extends Service implements DataClient.OnDataChangedListe
             Log.d(TAG, e.getMessage());
         }
 
-        mSocket.emit("wakeTime", t);
+        mSocket.emit("data", topLevel);
     }
 
     @Override
