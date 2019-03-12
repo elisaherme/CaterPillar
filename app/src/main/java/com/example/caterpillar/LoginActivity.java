@@ -1,22 +1,20 @@
 package com.example.caterpillar;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.content.Intent;
-import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 import com.server.interaction.SocketManager;
 import com.utils.encryption.AESUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.crypto.SecretKey;
 
@@ -33,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
+
 
         // Set up the login details
         mUsernameView = findViewById(R.id.input_user);
@@ -108,5 +107,11 @@ public class LoginActivity extends AppCompatActivity {
         }
         mSocket.emit("login", topLevel);
         Log.i("socket", "sent login details");
+    }
+
+    public void onClickAddFaceID(View view) {
+        Intent intent = new Intent(this, InitialiseFaceActivity.class);
+        startActivity(intent);
+
     }
 }

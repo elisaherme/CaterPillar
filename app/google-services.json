@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "806315085152",
+    "firebase_url": "https://mhml-da2ee.firebaseio.com",
+    "project_id": "mhml-da2ee",
+    "storage_bucket": "mhml-da2ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806315085152:android:04f667c82c702a5c",
+        "android_client_info": {
+          "package_name": "com.example.caterpillar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806315085152-qfk4m0klju0t6s7h2id8g7o7114937ia.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.caterpillar",
+            "certificate_hash": "6b8526de96582e534f7ece89a652c2732287d767"
+          }
+        },
+        {
+          "client_id": "806315085152-qcn8mm67o1d46p60s7ihv273nqlc6tm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARvuItjhI8B9kBhThqLNTlP3fXj2PHGBE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806315085152-qcn8mm67o1d46p60s7ihv273nqlc6tm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
