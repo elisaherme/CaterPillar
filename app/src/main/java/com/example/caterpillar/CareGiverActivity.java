@@ -3,6 +3,7 @@ package com.example.caterpillar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class CareGiverActivity extends AppCompatActivity {
         mSocket = app.getmSocket();
         mSocket.on("responseMed", medRequest);
         mSocket.emit("queryMed", app.getUser());
+        mSocket.on("responseHistory", historyRequest);
+        mSocket.emit("queryHistory", app.getUser());
 
         userName = findViewById(R.id.textPatientName);
         careGiver = findViewById(R.id.textView4);
@@ -75,6 +78,7 @@ public class CareGiverActivity extends AppCompatActivity {
                     Log.i ("Received JSON Data" , data.toString());
 
                     TextView textMedicationDetail = (TextView) findViewById(R.id.textMedicationDetail);
+                    textMedicationDetail.setMovementMethod(new ScrollingMovementMethod());
 
                     try {
                         String textOut = "";
@@ -106,6 +110,40 @@ public class CareGiverActivity extends AppCompatActivity {
                         Log.e("medRequest", e.getMessage());
                         return;
                    }
+
+                }
+            });
+        }
+    };
+    private Emitter.Listener historyRequest = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONArray data = (JSONArray) args[0];
+                    Log.i ("Received JSON Data" , data.toString());
+
+                    TextView textMedicationIntake = (TextView) findViewById(R.id.textMedicationIntake);
+                    textMedicationIntake.setMovementMethod(new ScrollingMovementMethod());
+
+                    try {
+                        String textOut = "";
+                        if(data.length() == 0) {
+                            textOut = "No medication intake history.";
+                        }
+                        else {
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject obj = data.getJSONObject(i);
+                                textOut = textOut + (i + 1) + ". " + obj.getString("MedName") + ";\t\t\tat " + obj.getString("Timestamp") + "\n";
+                            }
+                        }
+                        textMedicationIntake.setText(textOut);
+                    }
+                    catch (Exception e) {
+                        Log.e("historyRequest", e.getMessage());
+                        return;
+                    }
 
                 }
             });

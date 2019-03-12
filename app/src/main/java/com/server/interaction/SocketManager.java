@@ -24,7 +24,7 @@ import java.net.URISyntaxException;
 //  keep the global state of my application
 public class SocketManager extends Application {
     private Socket mSocket;
-    private static final String URL = "http://146.169.162.206:65080/";
+    private static final String URL = "http://146.169.161.84:65080/";
     //private static final String URL = "http://146.169.166.31:65080/";
     private static  String user;
     private static  String caregiver;
@@ -78,10 +78,10 @@ public class SocketManager extends Application {
 
     public void sendNotification(int level) {
 
-        // BEGIN_INCLUDE(build_action)
-        Intent intent = new Intent(this, IntakeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+//        // BEGIN_INCLUDE(build_action)
+//        Intent intent = new Intent(this, IntakeActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         // END_INCLUDE(build_action)
 
         // BEGIN_INCLUDE (build_notification)
@@ -90,7 +90,7 @@ public class SocketManager extends Application {
 
         builder.setSmallIcon(R.drawable.caterpillar);
 
-        builder.setContentIntent(pendingIntent);
+//        builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.caterpillar));
 
@@ -104,12 +104,22 @@ public class SocketManager extends Application {
         else if (level == 2) {
             builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
         }
+        else if (level == 3) {
+            long[] v = {500,1000};
+            builder.setVibrate(v);
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
+        }
+        else if (level == 4) {
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+        }
         else {
+            long[] v = {500,1000};
+            builder.setVibrate(v);
             builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         }
 
         builder.extend(new NotificationCompat.WearableExtender());
-        builder.setPriority(NotificationCompat.PRIORITY_MAX);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         // END_INCLUDE (build_notification)
 
         // BEGIN_INCLUDE(send_notification)

@@ -26,7 +26,10 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="face" />
-        <activity android:name=".IntakeActivity"></activity>
+        <activity android:name=".IntakeActivity"
+            android:launchMode="singleInstance">
+
+        </activity>
 
         <receiver android:name=".AlarmReceiver" />
 
