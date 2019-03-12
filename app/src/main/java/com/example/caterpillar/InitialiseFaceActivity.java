@@ -94,6 +94,8 @@ public final class InitialiseFaceActivity<string> extends AppCompatActivity {
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     private StorageReference mStorageRef;
+    private int sentImageCount=0;
+    private int imageCapturedCount=0;
 
     //==============================================================================================
     // Activity Methods
@@ -289,6 +291,7 @@ public final class InitialiseFaceActivity<string> extends AppCompatActivity {
     {   Uri fileUri = Uri.fromFile(filename);
         final StorageReference fileRef = mStorageRef.child(userID + "/" + filename.getName());
         UploadTask uploadTask = fileRef.putFile(fileUri);
+        imageCapturedCount++;
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -309,6 +312,7 @@ public final class InitialiseFaceActivity<string> extends AppCompatActivity {
                     Log.i("URL", downloadUri.toString());
                     sendURL(downloadUri.toString());
                     filename.delete();
+                    sentImageCount++;
                 } else {
                     // Handle failures
                     // ...
@@ -430,6 +434,7 @@ public final class InitialiseFaceActivity<string> extends AppCompatActivity {
             mCameraSource.release();
         }
         try {
+
             mSocket.emit("train_model", "finished uploading. train model");
         } catch(Exception e){
 
@@ -586,7 +591,8 @@ public final class InitialiseFaceActivity<string> extends AppCompatActivity {
 //                FaceTrackerActivity.this.onPause();
 //                FaceTrackerActivity.this.onStop();
 //                FaceTrackerActivity.this.onDestroy();
-
+                while (imageCapturedCount!=sentImageCount) {
+                }
                 InitialiseFaceActivity.this.finish();
 //                finish();
 //                Intent intent2 = new Intent(FaceTrackerActivity.this, LoginActivity.class);
