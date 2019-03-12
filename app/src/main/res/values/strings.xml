@@ -17,9 +17,14 @@
         completions."
     </string>
     <string name="encrypt_key">"Two One Nine Two"</string>
+<<<<<<< HEAD
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+=======
+    <string name="send_time">UPDATE DOSAGE TIME</string>
+    <string name="init_phone">No data has been received from the wearable yet</string>
+>>>>>>> a33788487b0237e9f103070dd69e5a019c26e3ed
 
 </resources>

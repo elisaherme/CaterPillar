@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.caterpillar">
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -23,8 +26,10 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="face" />
+        <activity android:name=".IntakeActivity"></activity>
 
-        <receiver android:name=".AlarmReceiver"/>
+        <receiver android:name=".AlarmReceiver" />
+
         <activity android:name=".AlarmActivity" />
         <activity android:name=".AddMedicationActivity" />
         <activity android:name=".QuestionsActivity" />
@@ -41,6 +46,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <service
+            android:name=".WatchSleep"
+            android:enabled="true"
+            />
     </application>
 
 </manifest>
