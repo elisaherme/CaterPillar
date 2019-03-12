@@ -50,6 +50,7 @@ public class CareGiverActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         mSocket.off("responseMed", medRequest);
+        mSocket.off("responseHistory", historyRequest);
     }
 
     public void onClickAddMedication(View view) {

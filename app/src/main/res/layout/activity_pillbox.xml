@@ -545,6 +545,7 @@
         android:onClick="onClickRefresh"
         android:text="Refresh"
         android:textSize="18sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
