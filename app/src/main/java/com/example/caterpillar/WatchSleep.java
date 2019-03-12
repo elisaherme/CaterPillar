@@ -26,6 +26,7 @@ public class WatchSleep extends Service implements DataClient.OnDataChangedListe
     private static final String COUNT_KEY = "com.example.caterpillar.count";
 
     private Socket mSocket;
+    private Long sleepTime;
 
     @Override
     public void onDataChanged(DataEventBuffer dataEvents){
@@ -95,12 +96,28 @@ public class WatchSleep extends Service implements DataClient.OnDataChangedListe
 
     private void updateSleepTime(Long t) {
         // do something
-        Log.i(TAG, "Sending time SLEEP button was pressed");
-        mSocket.emit("sleepTime", t);
+        Log.i(TAG, "Saving time SLEEP button was pressed");
+        sleepTime = t;
+        //mSocket.emit("sleepTime", t);
     }
 
     private void updateWakeTime(Long t) {
         Log.i(TAG, "Sending time WAKE button was pressed");
+
+        JSONObject topLevel = new JSONObject();
+        JSONObject info = new JSONObject();
+
+        try {
+            info.put("Username", "pat");
+            info.put("wakeTime", t.toString());
+            info.put("sleepTime", sleepTime.toString());
+
+            topLevel.put("type", "watchInfo");
+            topLevel.put("data", info);
+        } catch (JSONException e) {
+            Log.d(TAG, e.getMessage());
+        }
+
         mSocket.emit("wakeTime", t);
     }
 
