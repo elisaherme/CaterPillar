@@ -3,6 +3,7 @@ package com.example.caterpillar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //app.sendNotification();
+                Log.i ("FACEID" , "starting");
+                Intent intent = new Intent(MainActivity.this, InitialiseFaceActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -51,11 +54,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CareGiverActivity.class);
         startActivity(intent);
     }
-
-//    public void onClickManage(View view) {
-//        Intent intent = new Intent(this, AlarmActivity.class);
-//        startActivity(intent);
-//    }
 
     public void onClickSignOut(View view) {
         Intent intent = new Intent(this, LoginActivity.class);

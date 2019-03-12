@@ -92,9 +92,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onClickCreateAccount(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
-
-//        Intent sleepIntent = new Intent(this, WatchSleep.class);
-//        startService(sleepIntent);
     }
 
     public void onClickLogin(View view) {

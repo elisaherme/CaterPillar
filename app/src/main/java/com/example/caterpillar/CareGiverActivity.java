@@ -58,11 +58,6 @@ public class CareGiverActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickAddFaceID(View view) {
-        Intent intent = new Intent(this, InitialiseFaceActivity.class);
-        startActivity(intent);
-    }
-
     public void onClickUser(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -116,6 +111,7 @@ public class CareGiverActivity extends AppCompatActivity {
             });
         }
     };
+
     private Emitter.Listener historyRequest = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
