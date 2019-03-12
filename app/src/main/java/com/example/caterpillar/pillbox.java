@@ -296,6 +296,9 @@ public class pillbox extends AppCompatActivity {
                         int alertLevel = data.getInt("alertLevel");
                         int boxSent = data.getInt("boxToSend");
                         app.sendNotification(alertLevel);
+
+                        Intent intent = new Intent(pillbox.this, IntakeActivity.class);
+                        startActivity(intent);
                     }
 
                     catch (Exception e) {
