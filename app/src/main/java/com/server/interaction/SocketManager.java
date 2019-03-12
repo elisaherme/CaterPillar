@@ -74,11 +74,11 @@ public class SocketManager extends Application {
                 });
             }
         });
-        //sendNotification();
-        //mSocket.on("Notification", sendNotification);
+
+        mSocket.on("Notification", sendNotification);
     }
 
-    public void sendNotification() {
+    public void sendNotification2(int level) {
 
         // BEGIN_INCLUDE(build_action)
         Intent intent = new Intent(this, IntakeActivity.class);
@@ -100,7 +100,16 @@ public class SocketManager extends Application {
         builder.setContentText("Don't forget to take your pills :)");
         builder.setSubText("Tap to view details");
 
-        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        if(level == 1) {
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        }
+        else if (level == 2) {
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
+        }
+        else {
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+        }
+
         builder.extend(new NotificationCompat.WearableExtender());
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
         // END_INCLUDE (build_notification)

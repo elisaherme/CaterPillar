@@ -1,6 +1,11 @@
 package com.example.caterpillar;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +38,8 @@ public class pillbox extends AppCompatActivity {
 
     private String name;
     private TextView userName;
+
+    public static final int NOTIFICATION_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,4 +191,54 @@ public class pillbox extends AppCompatActivity {
             }
         }
     }
+
+    private Emitter.Listener sendNotification = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(pillbox.this, IntakeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                    // END_INCLUDE(build_action)
+
+                    // BEGIN_INCLUDE (build_notification)
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+
+                    builder.setSmallIcon(R.drawable.caterpillar);
+
+                    builder.setContentIntent(PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+                    builder.setAutoCancel(true);
+                    builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.caterpillar));
+
+                    builder.setContentTitle("Time to take your pills!");
+                    builder.setContentText("Don't forget to take your pills :)");
+                    builder.setSubText("Tap to view details");
+
+                    if(level == 1) {
+                        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+                    }
+                    else if (level == 2) {
+                        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
+                    }
+                    else {
+                        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+                    }
+
+                    builder.extend(new NotificationCompat.WearableExtender());
+                    builder.setPriority(NotificationCompat.PRIORITY_MAX);
+                    // END_INCLUDE (build_notification)
+
+                    // BEGIN_INCLUDE(send_notification)
+
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(
+                            NOTIFICATION_SERVICE);
+                    notificationManager.notify(NOTIFICATION_ID, builder.build());
+                    // END_INCLUDE(send_notification)
+                }
+            });
+        }
+    };
 }
