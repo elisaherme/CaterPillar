@@ -32,6 +32,7 @@ public class pillbox extends AppCompatActivity {
 //        //etc
 //    }};
 
+    private SocketManager app;
     private String name;
     private TextView userName;
 
@@ -40,7 +41,7 @@ public class pillbox extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pillbox);
 
-        SocketManager app = (SocketManager) getApplication();
+        app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
         mSocket.on("responseMed", fillPillbox);
         mSocket.emit("queryMed", app.getUser());
@@ -48,6 +49,7 @@ public class pillbox extends AppCompatActivity {
         mSocket.on("pill",pillDisplay);
         mSocket.on("pill_presence", updateEmptyStatus);
         mSocket.on("wrong_lid", warnWrongLid);
+        mSocket.on("startNotification", notification);
         userName = findViewById(R.id.textUsername);
         name = app.getUser();
         userName.setText(name);
@@ -280,4 +282,28 @@ public class pillbox extends AppCompatActivity {
 
 
     }
+
+    private Emitter.Listener notification = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        JSONObject data = (JSONObject) args[0];
+                        Log.i ("Received JSON Data" , data.toString());
+
+                        int alertLevel = data.getInt("alertLevel");
+                        int boxSent = data.getInt("boxToSend");
+                        app.sendNotification(alertLevel);
+                    }
+
+                    catch (Exception e) {
+                        Log.e("startNotification", e.getMessage());
+                        return;
+                    }
+                }
+            });
+        }
+    };
 }
