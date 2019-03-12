@@ -26,6 +26,7 @@ public class WatchSleep extends Service implements DataClient.OnDataChangedListe
     private static final String COUNT_KEY = "com.example.caterpillar.count";
 
     private Socket mSocket;
+    private SocketManager app;
     private Long sleepTime;
 
     @Override
@@ -108,7 +109,7 @@ public class WatchSleep extends Service implements DataClient.OnDataChangedListe
         JSONObject info = new JSONObject();
 
         try {
-            info.put("Username", "pat");
+            info.put("Username", app.getUser());
             info.put("wakeTime", t.toString());
             info.put("sleepTime", sleepTime.toString());
 
@@ -125,7 +126,7 @@ public class WatchSleep extends Service implements DataClient.OnDataChangedListe
     public int onStartCommand(Intent intent, int flags, int startId){
         Log.d(TAG, "in WatchSleep, onStartCommand");
 
-        SocketManager app = (SocketManager) getApplication();
+        app = (SocketManager) getApplication();
         mSocket = app.getmSocket();
 
         Wearable.getDataClient(this).addListener(this);
