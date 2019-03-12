@@ -24,7 +24,7 @@ import java.net.URISyntaxException;
 //  keep the global state of my application
 public class SocketManager extends Application {
     private Socket mSocket;
-    private static final String URL = "http://146.169.162.206:65080/";
+    private static final String URL = "http://146.169.161.84:65080/";
     //private static final String URL = "http://146.169.166.31:65080/";
     private static  String user;
     private static  String caregiver;
@@ -104,7 +104,17 @@ public class SocketManager extends Application {
         else if (level == 2) {
             builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
         }
+        else if (level == 3) {
+            long[] v = {500,1000};
+            builder.setVibrate(v);
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
+        }
+        else if (level == 4) {
+            builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+        }
         else {
+            long[] v = {500,1000};
+            builder.setVibrate(v);
             builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         }
 
