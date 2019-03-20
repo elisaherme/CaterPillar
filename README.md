@@ -3,6 +3,9 @@ Smart Personalised Pill Organiser
 
 ## `app` folder
 This folder contains the implementation of the CaterPillar Android tablet application.
+The overall activity layout and translation are illustrated in the following diagram:
+
+![Alt text](/app_flow.png?raw=true "Optional Title")
 
 ## `pillbox` folder
 The folder contains the pillbox_code.py which detects opening of lids and presence of pills, and the client_py which configures the WebSocket. 
@@ -39,4 +42,4 @@ adb devices
 # Relevant 
 * Server - [Github](https://github.com/jovanhan2/MobileHealthCare-Server)
 * Face Recognition - [Github](https://github.com/zyl115/MHML)
-* Adaptive System (Alert Level & Notification Time) - [GitHub](https://github.com/xxyypp/EE4-67-MHML)
+* Adaptive System (Alert Level & Notification Time) - [GitHub](https://github.com/xxyypp/EE4-67-Machine-Learning-Code)
