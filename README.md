@@ -1,5 +1,5 @@
 # CaterPillar
-Smart Personalised Pill Organise
+Smart Personalised Pill Organiser
 
 ## `app` folder
 For the tablet app.
