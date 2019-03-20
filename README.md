@@ -2,7 +2,7 @@
 Smart Personalised Pill Organiser
 
 ## `app` folder
-For the tablet app.
+This folder contains the implementation of the CaterPillar Android tablet application.
 
 ## `pillbox` folder
 The folder contains the pillbox_code.py which detects opening of lids and presence of pills, and the client_py which configures the WebSocket. 
