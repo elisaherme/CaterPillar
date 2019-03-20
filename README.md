@@ -11,6 +11,9 @@ The following libraries will need be installed before running the code.
 ```
 sudo apt-get install python3-spidev python-spidev
 ```
+
+The pillbox_code.py receives topic `slot_to_open` from the server and turns on the LED assigned to the topic. It also continuously detects the opening of the lid and presence of the pills and sends topics `topic_lid`, `topic_pills` and `topic_correct_lid` to the server.
+
 ## `wear` folder
 For the Android Wear app.  
 
