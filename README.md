@@ -1,5 +1,8 @@
 # CaterPillar
 Smart Personalised Pill Organiser
+
+The source code for the major components of this project has been compiled and stored in this GitHub repository. Future work and enhancement of CaterPillar proposed can be carried out by forking the repository. 
+
 # Relevant Components
 As each components are seperate, each of the corresponding README and Github Repositories are linked below
 * Server - [Github](https://github.com/jovanhan2/MobileHealthCare-Server)
