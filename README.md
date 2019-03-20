@@ -35,3 +35,4 @@ adb devices
 # Relevant 
 * Server - [Github](https://github.com/jovanhan2/MobileHealthCare-Server)
 * Face Recognition - [Github](https://github.com/zyl115/MHML)
+* Adaptive System (Alert Level & Notification Time) - [GitHub](https://github.com/xxyypp/EE4-67-Machine-Learning-Code)
