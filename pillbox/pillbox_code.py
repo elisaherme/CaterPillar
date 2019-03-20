@@ -175,9 +175,6 @@ while True:
     msg_sender.sendMsg(topic_pills, pill_char);
     msg_sender.sendMsg(topic_correct_lid , wrong_slot);
     
-
-	
-    #time.sleep(0.5)
 			
 
 
